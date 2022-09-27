@@ -6,41 +6,34 @@ import Logo from "../../_assets/images/ico_tasks_human.png";
 import Tasks from "../../components/tasks";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
     <Box>
-      <Grid
-        container
-        spacing={2}
-        direction="column"
-        alignItems="center"
-      >
-        <Grid item xs="6">
+      <Grid container spacing={2} direction="column" alignItems="center">
+        <Grid item xs={6}>
           <img alt="Logo tasks" src={Logo} className={Styles.img} />
         </Grid>
-        
-        <Grid item xs="6">
+
+        <Grid item xs={6}>
           <Tasks />
         </Grid>
       </Grid>
-      <Grid
-        container
-        spacing={2}
-        direction="column"
-        alignItems="center"
-      >
-        <Grid item xs="12">
+
+      <Grid container spacing={2} direction="column" alignItems="center">
+        <Grid item xs={12}>
           <TextField
             id="outlined-basic"
+            fullWidth
             label="Usuario"
             variant="outlined"
             size="medium"
           />
         </Grid>
-        <Grid item xs="12">
+        <Grid item xs={12}>
           <TextField
-          fullWidth
+            fullWidth
             id="password"
             label="Senha"
             variant="outlined"
@@ -52,12 +45,22 @@ const Login = () => {
 
       <Grid
         container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item xs={12} mt={2}>
+          <Link to="/">Cadastre-se</Link>
+        </Grid>
+      </Grid>
+      <Grid
+        container
         spacing={2}
         direction="column"
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs="12" mt={2}>
+        <Grid item xs={12} mt={2}>
           <Button variant="contained">Logar</Button>
         </Grid>
       </Grid>
