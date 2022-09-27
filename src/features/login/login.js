@@ -50,7 +50,7 @@ const Login = () => {
         alignItems="center"
       >
         <Grid item xs={12} mt={2}>
-          <Link to="/">Cadastre-se</Link>
+          <Link to="/cadastro">Cadastre-se</Link>
         </Grid>
       </Grid>
       <Grid
