@@ -1,18 +1,41 @@
-import { Button, Container, FormControl, Grid, TextField } from "@mui/material";
+import {
+  Button,
+  Container,
+  FormControl,
+  Grid,
+  Stack,
+  TextField,
+} from "@mui/material";
+import Tasks from "../../_assets/images/icons8-unpin-48.png";
 
 const Cadastro = () => {
   return (
-    <Container>
+    <Container sx={{ background: "#00C6CF" }}>
       <Grid container spacing={2}>
         <Grid item xs={3}></Grid>
         <Grid item xs={6}>
-          <h1>Cadastre-se</h1>
+          <Grid item>
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <h3>Cadastre-se</h3>
+              <img
+                src={Tasks}
+                alt="Tasks"
+                style={{ height: "50px", width: "50px" }}
+              />
+            </Stack>
+          </Grid>
+
           <FormControl fullWidth>
             <TextField
               id="nameUser"
               label="Digite seu nome"
               variant="outlined"
-              sx={{ padding: "8px" }}
+              sx={{ padding: "8px"}}
             />
 
             <TextField
