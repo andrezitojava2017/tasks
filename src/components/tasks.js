@@ -5,7 +5,7 @@ import Styles from './tasks.module.css';
 
 const Tasks = () => {
   return (
-    <Grid item spacing={2} className={Styles.h3}>
+    <Grid item className={Styles.h3} >
       <h1>Tasks</h1>
     </Grid>
   );
