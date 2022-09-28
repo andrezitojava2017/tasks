@@ -1,26 +1,13 @@
-import { Avatar, Container, Grid, Paper, Stack } from "@mui/material";
-import FormatListNumberedOutlinedIcon from "@mui/icons-material/FormatListNumberedOutlined";
-import Logo from "../../_assets/images/icons8-unpin-48.png";
-import Tasks from "../../components/tasks";
+import { Container, Grid, Paper } from "@mui/material";
+import GradingOutlinedIcon from "@mui/icons-material/GradingOutlined";
+import PlaylistAddOutlinedIcon from "@mui/icons-material/PlaylistAddOutlined";
+import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+import Header from "../../components/header";
 import React from "react";
 const Home = () => {
   return (
     <Container>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Stack
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="flex-start"
-            spacing={2}
-          >
-            <Avatar alt="Remy Sharp" src={Logo} />
-          </Stack>
-        </Grid>
-        <Grid item xs>
-          <Tasks />
-        </Grid>
-      </Grid>
+      <Header />
       <Grid
         container
         spacing={2}
@@ -28,10 +15,19 @@ const Home = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs>
+        <Grid item xs={4}>
           <Container>
-            <Paper elevation={3} sx={{width:'150px', height:'120px', padding: "15px", textAlign: "center" }}>
-              <FormatListNumberedOutlinedIcon
+            <Paper
+              elevation={3}
+              sx={{
+                width: "150px",
+                height: "120px",
+                padding: "15px",
+                textAlign: "center",
+                cursor: 'pointer'
+              }}
+            >
+              <PlaylistAddOutlinedIcon
                 sx={{ fontSize: 65, color: "#00C6CF", textAlign: "center" }}
               />
               <br />
@@ -40,10 +36,19 @@ const Home = () => {
           </Container>
         </Grid>
 
-        <Grid item xs>
+        <Grid item xs={4}>
           <Container>
-            <Paper elevation={3} sx={{width:'150px', height:'120px', padding: "15px", textAlign: "center" }}>
-              <FormatListNumberedOutlinedIcon
+            <Paper
+              elevation={3}
+              sx={{
+                width: "150px",
+                height: "120px",
+                padding: "15px",
+                textAlign: "center",
+                cursor: 'pointer'
+              }}
+            >
+              <GradingOutlinedIcon
                 sx={{ fontSize: 65, color: "#00C6CF", textAlign: "center" }}
               />
               <br />
@@ -52,10 +57,19 @@ const Home = () => {
           </Container>
         </Grid>
 
-        <Grid item xs>
+        <Grid item xs={4}>
           <Container>
-            <Paper elevation={3} sx={{ width:'150px', height:'120px', padding: "15px", textAlign: "center" }}>
-              <FormatListNumberedOutlinedIcon
+            <Paper
+              elevation={3}
+              sx={{
+                width: "150px",
+                height: "120px",
+                padding: "15px",
+                textAlign: "center",
+                cursor: 'pointer'
+              }}
+            >
+              <BarChartOutlinedIcon
                 sx={{ fontSize: 65, color: "#00C6CF", textAlign: "center" }}
               />
               <br />
