@@ -10,7 +10,7 @@ function App() {
   return (
     <Container>
       <CssBaseline />
-      <Box sx={{ border: "1px solid blue" }}>
+      <Box >
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
