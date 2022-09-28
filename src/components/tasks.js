@@ -1,18 +1,13 @@
 import React from "react";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Logo from "../_assets/images/icons8-unpin-48.png";
-
-import Styles from "./tasks.module.css";
 
 const Tasks = () => {
   return (
-    <Stack
-      direction="row"
-      alignItems="center"
-      justifyContent="center"
-      className={Styles.h3}
-    >
-      <h1>Tasks</h1>
+    <Stack direction="row" sx={{marginBottom:'10px'}}>
+      <Typography variant="h4" sx={{ flexGrow: 1 }}>
+        Tasks
+      </Typography>
       <img
         src={Logo}
         alt="Tasks Logo"
