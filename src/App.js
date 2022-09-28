@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "./pages/Home";
+import Home from "./features/home/Home";
 import Login from "./features/login/login";
 import Cadastre from './features/cadastro/cadastro'
 import { Routes, Route } from "react-router-dom";
