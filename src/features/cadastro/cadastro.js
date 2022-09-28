@@ -10,7 +10,7 @@ import Tasks from "../../_assets/images/icons8-unpin-48.png";
 
 const Cadastro = () => {
   return (
-    <Container sx={{ background: "#00C6CF" }}>
+    <Container>
       <Grid container spacing={2}>
         <Grid item xs={3}></Grid>
         <Grid item xs={6}>
@@ -36,6 +36,7 @@ const Cadastro = () => {
               label="Digite seu nome"
               variant="outlined"
               sx={{ padding: "8px"}}
+              size='small'
             />
 
             <TextField
@@ -44,6 +45,7 @@ const Cadastro = () => {
               variant="outlined"
               type="email"
               sx={{ padding: "8px" }}
+              size='small'
             />
 
             <TextField
@@ -52,6 +54,7 @@ const Cadastro = () => {
               variant="outlined"
               type="password"
               sx={{ padding: "8px" }}
+              size='small'
             />
           </FormControl>
           <Grid item>
