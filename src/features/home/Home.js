@@ -4,10 +4,12 @@ import PlaylistAddOutlinedIcon from "@mui/icons-material/PlaylistAddOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import Header from "../../components/header";
 import React from "react";
+import Tasks from "../../components/tasks";
 const Home = () => {
   return (
     <Container>
       <Header />
+      <Tasks/>
       <Grid
         container
         spacing={2}
