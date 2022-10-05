@@ -5,11 +5,12 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import Header from "../../components/header";
 import React from "react";
 import Tasks from "../../components/tasks";
+import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <Container>
       <Header />
-      <Tasks/>
+      <Tasks />
       <Grid
         container
         spacing={2}
@@ -26,7 +27,7 @@ const Home = () => {
                 height: "120px",
                 padding: "15px",
                 textAlign: "center",
-                cursor: 'pointer'
+                cursor: "pointer",
               }}
             >
               <PlaylistAddOutlinedIcon
@@ -40,22 +41,24 @@ const Home = () => {
 
         <Grid item xs={4}>
           <Container>
-            <Paper
-              elevation={3}
-              sx={{
-                width: "150px",
-                height: "120px",
-                padding: "15px",
-                textAlign: "center",
-                cursor: 'pointer'
-              }}
-            >
-              <GradingOutlinedIcon
-                sx={{ fontSize: 65, color: "#00C6CF", textAlign: "center" }}
-              />
-              <br />
-              <span>Minhas Tarefas</span>
-            </Paper>
+            <Link to="/tarefas">
+              <Paper
+                elevation={3}
+                sx={{
+                  width: "150px",
+                  height: "120px",
+                  padding: "15px",
+                  textAlign: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <GradingOutlinedIcon
+                  sx={{ fontSize: 65, color: "#00C6CF", textAlign: "center" }}
+                />
+                <br />
+                <span>Minhas Tarefas</span>
+              </Paper>
+            </Link>
           </Container>
         </Grid>
 
@@ -68,7 +71,7 @@ const Home = () => {
                 height: "120px",
                 padding: "15px",
                 textAlign: "center",
-                cursor: 'pointer'
+                cursor: "pointer",
               }}
             >
               <BarChartOutlinedIcon
