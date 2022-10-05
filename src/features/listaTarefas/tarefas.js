@@ -1,18 +1,14 @@
-import {
-  Button,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
-import { useEffect, useState } from "react";
-import Header from "../../components/header";
+import { Button, Container, Grid, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import Header from '../../components/header';
+import ItemTarefa from '../../components/itemTarefa';
 
 const Tarefas = () => {
   const [data, setData] = useState('');
 
   const diaAtual = () => {
     let dia = new Date().getDate();
-    setData(dia)
+    setData(dia);
   };
 
   useEffect(() => {
@@ -24,7 +20,7 @@ const Tarefas = () => {
       <Header />
       <Grid container>
         <Grid item xs={12}>
-          <Typography variant="h4" sx={{ textAlign: "center" }}>
+          <Typography variant="h4" sx={{ textAlign: 'center' }}>
             <span>Minhas Tarefas</span>
           </Typography>
         </Grid>
@@ -38,11 +34,18 @@ const Tarefas = () => {
       >
         <Grid item xs={6}>
           <Button variant="outlined" onClick={diaAtual}>
-            <Typography variant="h4">
-              {data}
-            </Typography>
+            <Typography variant="h4">{data}</Typography>
           </Button>
         </Grid>
+      </Grid>
+
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        sx={{ padding: '10px' }}
+      >
+        <ItemTarefa />
       </Grid>
     </Container>
   );

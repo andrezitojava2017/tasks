@@ -1,12 +1,5 @@
 import React from 'react';
-import Home from './features/home/Home';
-import Login from './features/login/login';
-import Cadastre from './features/cadastro/cadastro';
-import { Routes, Route } from 'react-router-dom';
-import { Box } from '@mui/material';
-import { Container, CssBaseline } from '@mui/material';
 import Perfil from './features/perfil/perfil';
-import React from 'react';
 import Home from './features/home/Home';
 import Login from './features/login/login';
 import Cadastre from './features/cadastro/cadastro';
