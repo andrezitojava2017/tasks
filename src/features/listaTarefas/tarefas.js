@@ -11,8 +11,10 @@ import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRou
 import { useEffect, useState } from "react";
 import Header from "../../components/header";
 import ItemTarefa from "../../components/itemTarefa";
+import LinkHome from "../../components/linkHome";
 
 const Tarefas = () => {
+
   const [data, setData] = useState("");
 
   const diaAtual = () => {
@@ -47,21 +49,14 @@ const Tarefas = () => {
           </Button>
         </Grid>
       </Grid>
-      <Grid
-        container
-        justifyContent="center"
-      >
+      <Grid container justifyContent="center">
         <Grid item xs="4" sx={{ marginTop: "20px" }}>
           <FormControl fullWidth>
             <TextField id="outlined-search" label="Procurar" type="search" />
           </FormControl>
         </Grid>
       </Grid>
-      <Grid
-        container
-        justifyContent="center"
-        sx={{ padding: "10px" }}
-      >
+      <Grid container justifyContent="center" sx={{ padding: "10px" }}>
         <Grid item xs="4">
           <Paper elevation="2">
             <ItemTarefa />
@@ -74,6 +69,9 @@ const Tarefas = () => {
             <AddCircleOutlineRoundedIcon />
           </Button>
         </Grid>
+      </Grid>
+      <Grid container justifyContent='center' sx={{marginTop: '15px'}}>
+        <LinkHome />
       </Grid>
     </Container>
   );
