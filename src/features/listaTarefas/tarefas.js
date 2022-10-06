@@ -1,10 +1,17 @@
-import { Button, Container, Grid, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import Header from '../../components/header';
-import ItemTarefa from '../../components/itemTarefa';
+import {
+  Button,
+  Container,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import Header from "../../components/header";
+import ItemTarefa from "../../components/itemTarefa";
 
 const Tarefas = () => {
-  const [data, setData] = useState('');
+  const [data, setData] = useState("");
 
   const diaAtual = () => {
     let dia = new Date().getDate();
@@ -20,7 +27,7 @@ const Tarefas = () => {
       <Header />
       <Grid container>
         <Grid item xs={12}>
-          <Typography variant="h4" sx={{ textAlign: 'center' }}>
+          <Typography variant="h4" sx={{ textAlign: "center" }}>
             <span>Minhas Tarefas</span>
           </Typography>
         </Grid>
@@ -38,14 +45,32 @@ const Tarefas = () => {
           </Button>
         </Grid>
       </Grid>
-
       <Grid
         container
+        direction="column"
         justifyContent="center"
         alignItems="center"
-        sx={{ padding: '10px' }}
       >
-        <ItemTarefa />
+        <Grid item xs={10} sx={{ marginTop: "20px" }}>
+          <TextField id="outlined-search" label="Procurar" type="search" />
+        </Grid>
+      </Grid>
+      <Grid
+        container
+        direction='column'
+        justifyContent="center"
+        alignItems="center"
+        sx={{ padding: "10px" }}
+      >
+        <Paper elevation='2' sx={{marginTop:'10px'}}>
+          <ItemTarefa />
+        </Paper>
+        <Paper elevation='2' sx={{marginTop:'10px'}}>
+          <ItemTarefa />
+        </Paper>
+        <Paper elevation='2' sx={{marginTop:'10px'}}>
+          <ItemTarefa />
+        </Paper>
       </Grid>
     </Container>
   );
