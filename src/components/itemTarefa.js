@@ -9,7 +9,7 @@ const ItemTarefa = (props) => {
     <>
       <Grid item>
         <div>
-          <ul style={{ listStyle: 'none' }}>
+          <ul style={{ listStyle: 'none', padding: '12px' }}>
             <li>
               <label>
                 <input
@@ -19,20 +19,10 @@ const ItemTarefa = (props) => {
                   value="Item 1"
                   onChange={test}
                 />
-                ITEM 1
+                ITEM 1ssssssssssssssssssss
               </label>
             </li>
 
-            <li>
-              <input
-                type="checkbox"
-                name="itemTarefa"
-                id="item2"
-                value="Item 2"
-                onChange={test}
-              />
-              <span>ITEM 2</span>
-            </li>
           </ul>
         </div>
       </Grid>

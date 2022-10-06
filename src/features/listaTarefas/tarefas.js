@@ -57,20 +57,21 @@ const Tarefas = () => {
       </Grid>
       <Grid
         container
-        direction='column'
+        direction="column"
         justifyContent="center"
         alignItems="center"
         sx={{ padding: "10px" }}
       >
-        <Paper elevation='2' sx={{marginTop:'10px'}}>
-          <ItemTarefa />
-        </Paper>
-        <Paper elevation='2' sx={{marginTop:'10px'}}>
-          <ItemTarefa />
-        </Paper>
-        <Paper elevation='2' sx={{marginTop:'10px'}}>
-          <ItemTarefa />
-        </Paper>
+        <Grid item xs={10}>
+          <Paper elevation="2">
+            <ItemTarefa />
+          </Paper>
+        </Grid>
+        <Grid item xs={10}>
+          <Paper elevation="2" >
+            <ItemTarefa />
+          </Paper>
+        </Grid>
       </Grid>
     </Container>
   );
