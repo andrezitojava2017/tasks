@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Stack,
   TextField,
 } from "@mui/material";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
@@ -27,25 +28,54 @@ const NovaTarefa = () => {
         <AddCircleOutlineRoundedIcon />
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Nova Tarefa</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
+            Preencha todos os campos para salvar as tarefas!
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
+          <Stack>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="titulo"
+              label="Titulo da tarefa"
+              type="text"
+              variant="standard"
+            />
+            <TextField
+              hiddenLabel
+              margin="dense"
+              id="data"
+              type="date"
+              variant="standard"
+            />
+            <TextField
+              hiddenLabel
+              margin="dense"
+              id="Hinicio"
+              type="time"
+              variant="standard"
+            />
+            <TextField
+              hiddenLabel
+              margin="dense"
+              id="Hfim"
+              type="time"
+              variant="standard"
+            />
+            <TextField
+              
+              margin="dense"
+              id="descricao"
+              label="Descrição"
+              type="text"
+              multiline
+            />
+          </Stack>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button onClick={handleClose}>Salvar</Button>
+          <Button onClick={handleClose}>Cancelar</Button>
         </DialogActions>
       </Dialog>
     </div>
