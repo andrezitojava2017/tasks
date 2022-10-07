@@ -7,16 +7,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import { useEffect, useState } from "react";
 import Header from "../../components/header";
 import ItemTarefa from "../../components/itemTarefa";
 import LinkHome from "../../components/linkHome";
+import Taref from "../../components/novaTarefa";
 
 const Tarefas = () => {
 
   const [data, setData] = useState("");
-
   const diaAtual = () => {
     let dia = new Date().getDate();
     setData(dia);
@@ -43,34 +42,32 @@ const Tarefas = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs="6">
+        <Grid item xs={6}>
           <Button variant="outlined" onClick={diaAtual}>
             <Typography variant="h4">{data}</Typography>
           </Button>
         </Grid>
       </Grid>
       <Grid container justifyContent="center">
-        <Grid item xs="4" sx={{ marginTop: "20px" }}>
+        <Grid item xs={4} sx={{ marginTop: "20px" }}>
           <FormControl fullWidth>
             <TextField id="outlined-search" label="Procurar" type="search" />
           </FormControl>
         </Grid>
       </Grid>
       <Grid container justifyContent="center" sx={{ padding: "10px" }}>
-        <Grid item xs="4">
-          <Paper elevation="2">
+        <Grid item xs={4}>
+          <Paper elevation={2}>
             <ItemTarefa />
           </Paper>
         </Grid>
       </Grid>
       <Grid container justifyContent="center">
-        <Grid item xs="4">
-          <Button variant="contained" fullWidth>
-            <AddCircleOutlineRoundedIcon />
-          </Button>
+        <Grid item xs={4}>
+          <Taref />
         </Grid>
       </Grid>
-      <Grid container justifyContent='center' sx={{marginTop: '15px'}}>
+      <Grid container justifyContent="center" sx={{ marginTop: "15px" }}>
         <LinkHome />
       </Grid>
     </Container>
