@@ -1,38 +1,55 @@
-import React from "react";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
+import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
+import React, { useState } from "react";
 
 const NovaTarefa = () => {
-    const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <>
-      <Dialog
-        fullWidth={fullWidth}
-        maxWidth={maxWidth}
-        open={open}
-        onClose={handleClose}
-      >
-        <DialogTitle>Titulo da pagina</DialogTitle>
+    <div>
+      <Button variant="contained" fullWidth onClick={handleClickOpen}>
+        <AddCircleOutlineRoundedIcon />
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Subscribe</DialogTitle>
         <DialogContent>
-          <DialogContentText>Texto do component</DialogContentText>
-          <Box
-            noValidate
-            component="form"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              m: "auto",
-              width: "fit-content",
-            }}
-          >
-            <FormControl sx={{ mt: 2, minWidth: 120 }}>
-              <InputLabel htmlFor="max-width">maxWidth</InputLabel>
-            </FormControl>
-          </Box>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here.
+            We will send updates occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+            variant="standard"
+          />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Subscribe</Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   );
 };
+
+export default NovaTarefa;
