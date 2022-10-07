@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import Header from "../../components/header";
 import ItemTarefa from "../../components/itemTarefa";
 import LinkHome from "../../components/linkHome";
-import Taref from "../../components/novaTarefa";
+import Taref from "../../components/dialogNovaTarefa";
 
 const Tarefas = () => {
 
