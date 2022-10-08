@@ -1,7 +1,38 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 const NovaTarefa = () => {
+  const [mydt, setMydt] = useState({
+    titulo: '',
+    data: '',
+    inicio: '',
+    fim: '',
+    descricao: '',
+  });
+
+  const changeTitulo = (e) => {
+    let titulo = e.target.value;
+    setMydt({ ...mydt, titulo: titulo });
+  };
+
+  const changeDate = (e) => {
+    setMydt({ ...mydt, data: e.target.value });
+  };
+
+  const changeHoraInicio = (e) => {
+    setMydt({ ...mydt, inicio: e.target.value });
+  };
+  const changeHoraFim = (e) => {
+    setMydt({ ...mydt, fim: e.target.value });
+  };
+
+  const changeDescricao = (e) => {
+    setMydt({ ...mydt, descricao: e.target.value });
+  };
+  const handleClik = (e) => {
+    console.log(mydt);
+  };
+
   return (
     <Grid
       container
@@ -25,6 +56,8 @@ const NovaTarefa = () => {
               label="Titulo"
               variant="outlined"
               type="text"
+              value={mydt.titulo}
+              onChange={changeTitulo}
               sx={{ padding: '8px' }}
             />
           </Grid>
@@ -35,6 +68,8 @@ const NovaTarefa = () => {
             hiddenLabel
             variant="outlined"
             type="date"
+            value={mydt.data}
+            onChange={changeDate}
             sx={{ padding: '8px' }}
           />
           <TextField
@@ -42,6 +77,8 @@ const NovaTarefa = () => {
             id="horaInicio"
             variant="outlined"
             type="time"
+            value={mydt.inicio}
+            onChange={changeHoraInicio}
             sx={{ padding: '8px' }}
           />
           <TextField
@@ -49,6 +86,8 @@ const NovaTarefa = () => {
             hiddenLabel
             variant="outlined"
             type="time"
+            value={mydt.fim}
+            onChange={changeHoraFim}
             sx={{ padding: '8px' }}
           />
         </Container>
@@ -61,12 +100,18 @@ const NovaTarefa = () => {
               label="Descrição"
               variant="outlined"
               type="text"
+              value={mydt.descricao}
+              onChange={changeDescricao}
               sx={{ padding: '8px' }}
             />
           </Grid>
         </Container>
         <Container>
-          <Button variant="contained" sx={{ marginLeft: '10px' }}>
+          <Button
+            variant="contained"
+            sx={{ marginLeft: '10px' }}
+            onClick={handleClik}
+          >
             <span>SALVAR</span>
           </Button>
           <Button variant="contained" sx={{ marginLeft: '10px' }}>
