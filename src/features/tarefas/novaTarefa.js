@@ -29,6 +29,11 @@ const NovaTarefa = () => {
   const changeDescricao = (e) => {
     setMydt({ ...mydt, descricao: e.target.value });
   };
+
+  const clickCancel = () => {
+    setMydt({ titulo: '', data: '', inicio: '', fim: '', descricao: '' });
+  };
+
   const handleClik = (e) => {
     console.log(mydt);
   };
@@ -114,7 +119,11 @@ const NovaTarefa = () => {
           >
             <span>SALVAR</span>
           </Button>
-          <Button variant="contained" sx={{ marginLeft: '10px' }}>
+          <Button
+            variant="contained"
+            sx={{ marginLeft: '10px' }}
+            onClick={clickCancel}
+          >
             <span>CANCELAR</span>
           </Button>
         </Container>
