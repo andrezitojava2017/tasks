@@ -20,22 +20,24 @@ const Home = () => {
       >
         <Grid item xs={4}>
           <Container>
-            <Paper
-              elevation={3}
-              sx={{
-                width: "150px",
-                height: "120px",
-                padding: "15px",
-                textAlign: "center",
-                cursor: "pointer",
-              }}
-            >
-              <PlaylistAddOutlinedIcon
-                sx={{ fontSize: 65, color: "#00C6CF", textAlign: "center" }}
-              />
-              <br />
-              <span>Adicionar Tarefa</span>
-            </Paper>
+            <Link to="/tarefas/nova">
+              <Paper
+                elevation={3}
+                sx={{
+                  width: "150px",
+                  height: "120px",
+                  padding: "15px",
+                  textAlign: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <PlaylistAddOutlinedIcon
+                  sx={{ fontSize: 65, color: "#00C6CF", textAlign: "center" }}
+                />
+                <br />
+                <span>Adicionar Tarefa</span>
+              </Paper>
+            </Link>
           </Container>
         </Grid>
 
