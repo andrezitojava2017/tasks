@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  Grid,
-  TextField,
-  Typography,
-} from '@mui/material';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React from 'react';
 
 const NovaTarefa = () => {
@@ -18,7 +9,7 @@ const NovaTarefa = () => {
       direction="column"
       justifyContent="center"
       alignItems="center"
-      sx={{ marginTop: '15px', marginBottom: '15px', border: '1px solid red' }}
+      sx={{ marginTop: '15px', marginBottom: '15px' }}
     >
       <Grid item>
         <Typography variant="h4" sx={{ textAlign: 'center' }}>
