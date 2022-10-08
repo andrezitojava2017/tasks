@@ -2,7 +2,7 @@ import { Avatar, Container, Grid, Stack, Typography } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import Image from '../../_assets/images/icons8-unpin-48.png';
 
-const Perfil = () => {
+const Perfil = (props) => {
   return (
     <Container>
       <Grid
@@ -23,16 +23,21 @@ const Perfil = () => {
           component="h3"
           sx={{ textAlign: 'center', marginTop: '-10px' }}
         >
-          <h3>Jedeson Andre</h3>
+          <h3>{props.nome}</h3>
         </Typography>
       </Grid>
 
       <Grid item xs={12}>
-        <Stack direction="row" spacing={2}>
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="center"
+          alignItems="center"
+        >
           <Avatar alt="E-mail usuario">
             <GoogleIcon />
           </Avatar>
-          <Typography variant="body1">andre_sjx@live.com</Typography>
+          <Typography variant="body1">{props.email}</Typography>
         </Stack>
       </Grid>
     </Container>
