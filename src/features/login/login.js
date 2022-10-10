@@ -1,22 +1,23 @@
 import React from "react";
 import Styles from "./login.module.css";
-import { Box } from "@mui/material";
+import { Container, IconButton } from "@mui/material";
+import GoogleIcon from "@mui/icons-material/Google";
+import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Logo from "../../_assets/images/ico_tasks_human.png";
 import Tasks from "../../components/tasks";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import Logar from "../../api/loginGoogle"
+import Logar from "../../api/loginGoogle";
 
 const Login = () => {
-
-  const handleGoogle = ()=>{
+  const handleGoogle = () => {
     Logar();
-  }
+  };
 
   return (
-    <Box>
+    <Container>
       <Grid container spacing={2} direction="column" alignItems="center">
         <Grid item xs={6}>
           <img alt="Logo tasks" src={Logo} className={Styles.img} />
@@ -55,13 +56,19 @@ const Login = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs={12} mt={2}>
+        <Grid item xs={6} mt={2}>
           <Link to="/cadastro">Cadastre-se</Link>
-        </Grid>
-        <Grid item xs={12} mt={2}>
-          <Button variant="contained" onClick={handleGoogle}>Google</Button>
+          <Button variant="contained" sx={{ marginLeft: "15px" }}>
+            Logar
+          </Button>
         </Grid>
       </Grid>
+      <Grid container spacing={2} justifyContent="center" alignItems="center">
+        <Grid item xs={6} mt={2}>
+          <Divider />
+        </Grid>
+      </Grid>
+
       <Grid
         container
         spacing={2}
@@ -70,10 +77,12 @@ const Login = () => {
         alignItems="center"
       >
         <Grid item xs={12} mt={2}>
-          <Button variant="contained">Logar</Button>
+          <Button variant="contained" color="error" onClick={handleGoogle}>
+            entrar com Google
+          </Button>
         </Grid>
       </Grid>
-    </Box>
+    </Container>
   );
 };
 
