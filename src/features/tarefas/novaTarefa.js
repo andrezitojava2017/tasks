@@ -1,4 +1,4 @@
-import { FormControl, Grid, TextField } from "@mui/material";
+import { FormControl, Grid, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 
 const NovaTarefa = () => {
@@ -10,19 +10,25 @@ const NovaTarefa = () => {
     >
       <Grid xs={3}></Grid>
       <Grid item xs={6}>
-        <Grid item xs={6}>
-          
-            <TextField
-            fullWidth
-              id="titulo"
-              label="Titulo"
-              variant="outlined"
-              sx={{ padding: "8px" }}
-              size="small"
-            />
-         
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
+          <Stack direction="row" sx={{ marginBottom: "10px" }}>
+            <Typography variant="h4" sx={{ flexGrow: 1 }}>
+              Nova Tarefa
+            </Typography>
+          </Stack>
         </Grid>
-        <Grid item xs={6}>
+
+        <Grid item xs={8}>
+          <TextField
+            fullWidth
+            id="titulo"
+            label="Titulo"
+            variant="outlined"
+            sx={{ padding: "8px" }}
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={8}>
           <TextField
             id="data"
             hiddenLabel
@@ -46,6 +52,17 @@ const NovaTarefa = () => {
             type="time"
             sx={{ padding: "8px" }}
             size="small"
+          />
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            fullWidth
+            id="descricao"
+            label="Descricao"
+            variant="outlined"
+            type="text"
+            sx={{ padding: "8px" }}
+            multiline
           />
         </Grid>
       </Grid>
