@@ -23,7 +23,7 @@ function App() {
           <Route path="/tarefas/nova" element={<NovaTarefa />} />
         </Routes>
       </Box>
-      </>
+    </>
   );
 }
 
