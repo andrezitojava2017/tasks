@@ -7,8 +7,14 @@ import Tasks from "../../components/tasks";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import Logar from "../../api/loginGoogle"
 
 const Login = () => {
+
+  const handleGoogle = ()=>{
+    Logar();
+  }
+
   return (
     <Box>
       <Grid container spacing={2} direction="column" alignItems="center">
@@ -51,6 +57,9 @@ const Login = () => {
       >
         <Grid item xs={12} mt={2}>
           <Link to="/cadastro">Cadastre-se</Link>
+        </Grid>
+        <Grid item xs={12} mt={2}>
+          <Button variant="contained" onClick={handleGoogle}>Google</Button>
         </Grid>
       </Grid>
       <Grid
