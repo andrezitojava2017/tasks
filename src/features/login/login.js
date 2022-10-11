@@ -1,19 +1,27 @@
-import React from "react";
-import Styles from "./login.module.css";
-import { Box } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import Logo from "../../_assets/images/ico_tasks_human.png";
-import Tasks from "../../components/tasks";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
-import Logar from "../../api/loginGoogle"
+import React, { useState, useEffect } from 'react';
+import Styles from './login.module.css';
+import { Box, Collapse } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Logo from '../../_assets/images/ico_tasks_human.png';
+import Tasks from '../../components/tasks';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import Logar from '../../api/loginGoogle';
+import AlertMessage from '../../components/alertMessage';
 
 const Login = () => {
+  const [open, setOpen] = useState(false);
 
-  const handleGoogle = ()=>{
-    Logar();
-  }
+  const handleGoogle = async () => {
+    const result = await Logar();
+    console.log(result);
+    if (Array.isArray(result)) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  };
 
   return (
     <Box>
@@ -26,7 +34,6 @@ const Login = () => {
           <Tasks />
         </Grid>
       </Grid>
-
       <Grid container spacing={2} direction="column" alignItems="center">
         <Grid item xs={12}>
           <TextField
@@ -48,7 +55,6 @@ const Login = () => {
           />
         </Grid>
       </Grid>
-
       <Grid
         container
         direction="column"
@@ -59,7 +65,9 @@ const Login = () => {
           <Link to="/cadastro">Cadastre-se</Link>
         </Grid>
         <Grid item xs={12} mt={2}>
-          <Button variant="contained" onClick={handleGoogle}>Google</Button>
+          <Button variant="contained" onClick={handleGoogle}>
+            Google
+          </Button>
         </Grid>
       </Grid>
       <Grid
@@ -72,6 +80,7 @@ const Login = () => {
         <Grid item xs={12} mt={2}>
           <Button variant="contained">Logar</Button>
         </Grid>
+        <AlertMessage message="ERROR" type="error" openn={open} />;
       </Grid>
     </Box>
   );
