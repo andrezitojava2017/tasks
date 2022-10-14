@@ -20,7 +20,6 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
-            <Route path="/cadastro" element={<Cadastre />} />
             <Route path="/perfil" element={<Perfil />} />
             <Route path="/tarefas" element={<Tarefas />} />
             <Route path="/tarefas/nova" element={<NovaTarefa />} />
@@ -28,6 +27,7 @@ function App() {
         ) : (
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/cadastro" element={<Cadastre />} />
           </Routes>
         )}
       </Box>
