@@ -8,12 +8,33 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import LoginInGoogle from '../../features/login/logInGoogle';
+import { useState } from 'react';
+import { LoginEmailPassword } from './functions/logar';
 
 const Login = () => {
-  const logIn = () => {
+
+  const [userLogin, setUserLogin] = useState({
+    'email': '',
+    'password': '',
+  })
+
+  const logIn = async () => {
+    console.log(userLogin)
+    let result = await LoginEmailPassword(userLogin.email, userLogin.password);
+
+    /*
     localStorage.setItem('userData', 'Jederson Andre');
     document.location.reload();
+    */
   };
+
+  const handleEmail = (e)=>{
+    setUserLogin({...userLogin, 'email': e.target.value});
+  }
+
+  const handlePassword = (e)=>{
+    setUserLogin({...userLogin, 'password': e.target.value});
+  }
 
   return (
     <Container>
@@ -40,6 +61,7 @@ const Login = () => {
               label="Usuario"
               variant="outlined"
               size="medium"
+              onChange={handleEmail}
             />
 
             <TextField
@@ -48,6 +70,7 @@ const Login = () => {
               variant="outlined"
               type="password"
               size="medium"
+              onChange={handlePassword}
             />
           </FormControl>
 
