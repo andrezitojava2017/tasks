@@ -7,22 +7,9 @@ import Tasks from '../../components/tasks';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import Logar from '../../api/loginGoogle';
-import AlertMessage from '../../components/alertMessage';
+import LoginInGoogle from '../../components/logInGoogle';
 
 const Login = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleGoogle = async () => {
-    const result = await Logar();
-    console.log(result);
-    if (Array.isArray(result)) {
-      setOpen(true);
-    } else {
-      setOpen(false);
-    }
-  };
-
   return (
     <Box>
       <Grid container spacing={2} direction="column" alignItems="center">
@@ -64,10 +51,8 @@ const Login = () => {
         <Grid item xs={12} mt={2}>
           <Link to="/cadastro">Cadastre-se</Link>
         </Grid>
-        <Grid item xs={12} mt={2}>
-          <Button variant="contained" onClick={handleGoogle}>
-            Google
-          </Button>
+        <Grid item xs={6} mt={2}>
+          <LoginInGoogle />
         </Grid>
       </Grid>
       <Grid
@@ -80,7 +65,6 @@ const Login = () => {
         <Grid item xs={12} mt={2}>
           <Button variant="contained">Logar</Button>
         </Grid>
-        <AlertMessage message="ERROR" type="error" openn={open} />;
       </Grid>
     </Box>
   );
