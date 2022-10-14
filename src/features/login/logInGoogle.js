@@ -1,23 +1,33 @@
-import React, { useState } from 'react';
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
-import { Button, Collapse, IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import LoginGoogle from '../../api/loginGoogle';
+import React, { useState } from "react";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import { Button, Collapse, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import LoginGoogle from "../../api/loginGoogle";
 
 const LoginInGoogle = () => {
   const [open, setOpen] = useState(false);
   const [erro, setError] = useState({});
+
   const loginGoogle = async () => {
     let resultLogin = await LoginGoogle();
-    console.log(resultLogin);
+
+    createUserLocal(resultLogin);
+
+    /*console.log(resultLogin);*/
+
     if (Array.isArray(resultLogin)) {
       setError(resultLogin[0]);
       console.log(resultLogin);
       setOpen(true);
     } else {
       setOpen(false);
+      document.location.reload();
     }
+  };
+
+  const createUserLocal = (result) => {
+    localStorage.setItem("data", JSON.stringify(result.providerData[0]));
   };
 
   return (
