@@ -10,6 +10,11 @@ import { Link } from 'react-router-dom';
 import LoginInGoogle from '../../features/login/logInGoogle';
 
 const Login = () => {
+  const logIn = () => {
+    localStorage.setItem('userData', 'Jederson Andre');
+    document.location.reload();
+  };
+
   return (
     <Container>
       <Grid
@@ -51,7 +56,9 @@ const Login = () => {
               <Link to="/cadastro">Cadastre-se</Link>
             </Stack>
             <Stack sx={{ paddingTop: '10px' }}>
-              <Button variant="contained">Logar</Button>
+              <Button variant="contained" onClick={logIn}>
+                Logar
+              </Button>
             </Stack>
           </Grid>
 
