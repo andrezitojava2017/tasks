@@ -1,6 +1,5 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import ConfigFireBase from './configFireBase';
-import AlertMessage from '../components/alertMessage';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
@@ -23,7 +22,8 @@ const LoginGoogle = async () => {
     .catch((error) => {
       // Handle Errors here.
       const errorMessage = error.message;
-      return [{ view: true, message: errorMessage }];
+      const errorCode = error.code;
+      return [{ message: errorMessage, errorCode: errorCode }];
     });
   return dat;
 };
