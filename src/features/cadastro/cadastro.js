@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import CreateLoginEmailPassword from "../../api/createLoginEmailPassword";
+import {CreateLoginEmailPassword} from "../login/functions/loginGoogle";
 import Tasks from "../../_assets/images/icons8-unpin-48.png";
 
 const Cadastro = () => {

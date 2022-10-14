@@ -3,7 +3,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { Button, Collapse, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import LoginGoogle from "../../api/loginGoogle";
+import {LoginGoogle} from "../login/functions/loginGoogle";
 
 const LoginInGoogle = () => {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,6 @@ const LoginInGoogle = () => {
 
     if (Array.isArray(resultLogin)) {
       setError(resultLogin[0]);
-      console.log(resultLogin);
       setOpen(true);
     } else {
       setOpen(false);
