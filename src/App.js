@@ -10,18 +10,26 @@ import { CssBaseline } from '@mui/material';
 import NovaTarefa from './features/tarefas/novaTarefa';
 
 function App() {
+  const userDat = localStorage.getItem('userData');
+
   return (
     <>
       <CssBaseline />
       <Box>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/cadastro" element={<Cadastre />} />
-          <Route path="/perfil" element={<Perfil />} />
-          <Route path="/tarefas" element={<Tarefas />} />
-          <Route path="/tarefas/nova" element={<NovaTarefa />} />
-        </Routes>
+        {userDat ? (
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/cadastro" element={<Cadastre />} />
+            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/tarefas" element={<Tarefas />} />
+            <Route path="/tarefas/nova" element={<NovaTarefa />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Login />} />
+          </Routes>
+        )}
       </Box>
     </>
   );
