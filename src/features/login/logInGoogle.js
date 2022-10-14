@@ -3,7 +3,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { Button, Collapse, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import {LoginGoogle} from "../login/functions/loginGoogle";
+import {LoginGoogle} from "./functions/logar";
 
 const LoginInGoogle = () => {
   const [open, setOpen] = useState(false);
