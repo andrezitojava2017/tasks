@@ -3,7 +3,7 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import { Button, Collapse, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import LoginGoogle from '../api/loginGoogle';
+import LoginGoogle from '../../api/loginGoogle';
 
 const LoginInGoogle = () => {
   const [open, setOpen] = useState(false);
@@ -43,7 +43,7 @@ const LoginInGoogle = () => {
         </Alert>
       </Collapse>
       <Button variant="contained" onClick={loginGoogle}>
-        Google
+        entrar com google
       </Button>
     </Stack>
   );
