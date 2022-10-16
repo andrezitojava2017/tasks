@@ -1,8 +1,29 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material';
 import React, { useState } from 'react';
 import { SetNewTask } from '../../api/cloudFirestore';
+import CircularProgress from '@mui/material/CircularProgress';
+import { green } from '@mui/material/colors';
+import Allert from '../../components/allert';
+import Confirmation from '../../components/confirmation';
 
 const NovaTarefa = () => {
+  // estado que sera utilizado no cmponent Allert
+  const [open, setOpen] = useState(false);
+  // estado que define o tipo do alert a ser exibido
+  const [type, setType] = useState('success');
+  // estado que armazena a mensagema a ser exibida no alert
+  const [message, setMessage] = useState('Informação tratada com sucesso!');
+  // estados para exibir a barra de progresso no botao salvar
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const [mydt, setMydt] = useState({
     titulo: '',
     data: '',
@@ -36,13 +57,32 @@ const NovaTarefa = () => {
   };
 
   const insertNewTask = async () => {
-    let result = await SetNewTask(
-      mydt.titulo,
-      mydt.data,
-      mydt.inicio,
-      mydt.fim,
-      mydt.descricao
-    );
+    if (!loading) {
+      // exibi a barra de progresso no button salvar
+      setSuccess(false);
+      setLoading(true);
+
+      // chama a api que ira inserir os dados no firestore
+      let result = await SetNewTask(
+        mydt.titulo,
+        mydt.data,
+        mydt.inicio,
+        mydt.fim,
+        mydt.descricao
+      );
+
+      if (Array.isArray(result)) {
+        setOpen(true);
+        setType('error');
+        setMessage(result[0].errorMessage);
+        setLoading(false);
+        setSuccess(true);
+      } else {
+        setLoading(false);
+        setSuccess(true);
+        setOpen(true);
+      }
+    }
   };
 
   return (
@@ -119,22 +159,40 @@ const NovaTarefa = () => {
           </Grid>
         </Container>
         <Container>
-          <Button
-            variant="contained"
-            sx={{ marginLeft: '10px' }}
-            onClick={insertNewTask}
-          >
-            <span>SALVAR</span>
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ marginLeft: '10px' }}
-            onClick={clickCancel}
-          >
-            <span>CANCELAR</span>
-          </Button>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ m: 1, position: 'relative' }}>
+              <Button
+                variant="contained"
+                disabled={loading}
+                onClick={insertNewTask}
+              >
+                Salvar
+              </Button>
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: green[500],
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    marginTop: '-12px',
+                    marginLeft: '-12px',
+                  }}
+                />
+              )}
+            </Box>
+            <Button
+              variant="contained"
+              sx={{ marginLeft: '10px' }}
+              onClick={clickCancel}
+            >
+              <span>CANCELAR</span>
+            </Button>
+          </Box>
         </Container>
       </Grid>
+      <Allert type={type} open={open} setOpen={setOpen} message={message} />
     </Grid>
   );
 };
