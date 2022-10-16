@@ -11,7 +11,6 @@ import { SetNewTask } from '../../api/cloudFirestore';
 import CircularProgress from '@mui/material/CircularProgress';
 import { green } from '@mui/material/colors';
 import Allert from '../../components/allert';
-import Confirmation from '../../components/confirmation';
 
 const NovaTarefa = () => {
   // estado que sera utilizado no cmponent Allert
