@@ -1,5 +1,6 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { SetNewTask } from '../../api/cloudFirestore';
 
 const NovaTarefa = () => {
   const [mydt, setMydt] = useState({
@@ -34,8 +35,14 @@ const NovaTarefa = () => {
     setMydt({ titulo: '', data: '', inicio: '', fim: '', descricao: '' });
   };
 
-  const handleClik = (e) => {
-    console.log(mydt);
+  const insertNewTask = async () => {
+    let result = await SetNewTask(
+      mydt.titulo,
+      mydt.data,
+      mydt.inicio,
+      mydt.fim,
+      mydt.descricao
+    );
   };
 
   return (
@@ -115,7 +122,7 @@ const NovaTarefa = () => {
           <Button
             variant="contained"
             sx={{ marginLeft: '10px' }}
-            onClick={handleClik}
+            onClick={insertNewTask}
           >
             <span>SALVAR</span>
           </Button>
