@@ -10,20 +10,30 @@ import { Link } from 'react-router-dom';
 import LoginInGoogle from '../../features/login/logInGoogle';
 import { useState } from 'react';
 import { LoginEmailPassword } from '../../api/loginFunctions';
+import Allert from '../../components/allert';
 
 const Login = () => {
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState('');
+
   const [userLogin, setUserLogin] = useState({
     email: '',
     password: '',
   });
 
   const logIn = async () => {
-    console.log(userLogin);
     let result = await LoginEmailPassword(userLogin.email, userLogin.password);
 
+    if (Array.isArray(result)) {
+      setError(result[0].errorMessage);
+      setOpen(true);
+    } else {
+      localStorage.setItem('data', result.uid);
+      document.location.reload();
+    }
+
     /*
-    localStorage.setItem('userData', 'Jederson Andre');
-    document.location.reload();
+
     */
   };
 
@@ -90,6 +100,7 @@ const Login = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Allert open={open} setOpen={setOpen} errorMessage={error} />
     </Container>
   );
 };
