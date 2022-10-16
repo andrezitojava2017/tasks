@@ -7,9 +7,8 @@ import Tasks from '../../components/tasks';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import LoginInGoogle from '../../features/login/logInGoogle';
 import { useState } from 'react';
-import { LoginEmailPassword } from '../../api/loginFunctions';
+import { LoginEmailPassword, LoginGoogle } from '../../api/loginFunctions';
 import Allert from '../../components/allert';
 
 const Login = () => {
@@ -21,9 +20,12 @@ const Login = () => {
     password: '',
   });
 
-  const logIn = async () => {
+  const loginWithEmailAndPassword = async () => {
     let result = await LoginEmailPassword(userLogin.email, userLogin.password);
+    conditionalCheck(result);
+  };
 
+  const conditionalCheck = (result) => {
     if (Array.isArray(result)) {
       setError(result[0].errorMessage);
       setOpen(true);
@@ -31,10 +33,12 @@ const Login = () => {
       localStorage.setItem('data', result.uid);
       document.location.reload();
     }
+  };
 
-    /*
+  const loginWithGoogleAccount = async () => {
+    let resultLogin = await LoginGoogle();
 
-    */
+    conditionalCheck(resultLogin);
   };
 
   const handleEmail = (e) => {
@@ -88,7 +92,7 @@ const Login = () => {
               <Link to="/cadastro">Cadastre-se</Link>
             </Stack>
             <Stack sx={{ paddingTop: '10px' }}>
-              <Button variant="contained" onClick={logIn}>
+              <Button variant="contained" onClick={loginWithEmailAndPassword}>
                 Logar
               </Button>
             </Stack>
@@ -96,7 +100,9 @@ const Login = () => {
 
           <Divider sx={{ marginTop: '15px' }} />
           <Grid item mt={2}>
-            <LoginInGoogle />
+            <Button variant="contained" onClick={loginWithGoogleAccount}>
+              entrar com google
+            </Button>
           </Grid>
         </Grid>
       </Grid>
