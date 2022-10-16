@@ -30,7 +30,7 @@ const Login = () => {
       setError(result[0].errorMessage);
       setOpen(true);
     } else {
-      localStorage.setItem('data', result.uid);
+      sessionStorage.setItem('data', result.uid);
       document.location.reload();
     }
   };
