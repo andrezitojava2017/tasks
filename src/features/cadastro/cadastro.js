@@ -6,52 +6,58 @@ import {
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
-import { useState } from "react";
-import {CreateLoginEmailPassword} from "../login/functions/logar";
-import Tasks from "../../_assets/images/icons8-unpin-48.png";
+} from '@mui/material';
+import { useState } from 'react';
+import { CreateLoginEmailPassword } from '../../api/loginFunctions';
+import Tasks from '../../_assets/images/icons8-unpin-48.png';
 
 const Cadastro = () => {
-
   const [userData, setUserData] = useState({
-    'name' : '',
-    'email' : '',
-    'password' : '',
+    name: '',
+    email: '',
+    password: '',
   });
 
-  const handleChangedName = (e)=>{
-    setUserData({...userData, 'name': e.target.value});
-  }
+  const handleChangedName = (e) => {
+    setUserData({ ...userData, name: e.target.value });
+  };
 
-  const handleChangeEmail = (e)=>{
-    setUserData({...userData, 'email': e.target.value})
-  }
+  const handleChangeEmail = (e) => {
+    setUserData({ ...userData, email: e.target.value });
+  };
 
-  const handleChangePassword = (e)=>{
-    setUserData({...userData, 'password': e.target.value})
-  }
+  const handleChangePassword = (e) => {
+    setUserData({ ...userData, password: e.target.value });
+  };
 
-  const handleClikSaveUser = async(e)=>{
-    let result = await CreateLoginEmailPassword(userData.email, userData.password);
+  const handleClikSaveUser = async (e) => {
+    let result = await CreateLoginEmailPassword(
+      userData.email,
+      userData.password
+    );
     console.log(result);
-
-  }
+  };
   return (
     <Container>
-      <Grid container spacing={2} sx={{marginTop:'15px', marginBottom:'15px'}}>
+      <Grid
+        container
+        spacing={2}
+        sx={{ marginTop: '15px', marginBottom: '15px' }}
+      >
         <Grid item xs={3}></Grid>
         <Grid item xs={6}>
-          <Grid item direction="row" justifyContent="center" alignItems="center">
-            <Stack
-              direction="row"
-            >
-              <Typography variant="h4">
-                Cadastre-se
-              </Typography>
+          <Grid
+            item
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Stack direction="row">
+              <Typography variant="h4">Cadastre-se</Typography>
               <img
                 src={Tasks}
                 alt="Tasks"
-                style={{ height: "50px", width: "50px" }}
+                style={{ height: '50px', width: '50px' }}
               />
             </Stack>
           </Grid>
@@ -61,7 +67,7 @@ const Cadastro = () => {
               id="nameUser"
               label="Digite seu nome"
               variant="outlined"
-              sx={{ padding: "8px" }}
+              sx={{ padding: '8px' }}
               size="small"
               onChange={handleChangedName}
             />
@@ -71,7 +77,7 @@ const Cadastro = () => {
               label="E-mail"
               variant="outlined"
               type="email"
-              sx={{ padding: "8px" }}
+              sx={{ padding: '8px' }}
               size="small"
               onChange={handleChangeEmail}
             />
@@ -81,7 +87,7 @@ const Cadastro = () => {
               label="Senha"
               variant="outlined"
               type="password"
-              sx={{ padding: "8px" }}
+              sx={{ padding: '8px' }}
               size="small"
               onChange={handleChangePassword}
             />
@@ -91,7 +97,7 @@ const Cadastro = () => {
               fullWidth
               variant="contained"
               color="primary"
-              sx={{ marginBottom: "5px" }}
+              sx={{ marginBottom: '5px' }}
               onClick={handleClikSaveUser}
             >
               Cadastrar

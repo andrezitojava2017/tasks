@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
-import { Button, Collapse, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import {LoginGoogle} from "./functions/logar";
+import React, { useState } from 'react';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import { Button, Collapse, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { LoginGoogle } from '../../api/loginFunctions';
 
 const LoginInGoogle = () => {
   const [open, setOpen] = useState(false);
@@ -26,7 +26,7 @@ const LoginInGoogle = () => {
   };
 
   const createUserLocal = (result) => {
-    localStorage.setItem("data", JSON.stringify(result.providerData[0]));
+    localStorage.setItem('data', JSON.stringify(result.providerData[0]));
   };
 
   return (

@@ -9,17 +9,16 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import LoginInGoogle from '../../features/login/logInGoogle';
 import { useState } from 'react';
-import { LoginEmailPassword } from './functions/logar';
+import { LoginEmailPassword } from '../../api/loginFunctions';
 
 const Login = () => {
-
   const [userLogin, setUserLogin] = useState({
-    'email': '',
-    'password': '',
-  })
+    email: '',
+    password: '',
+  });
 
   const logIn = async () => {
-    console.log(userLogin)
+    console.log(userLogin);
     let result = await LoginEmailPassword(userLogin.email, userLogin.password);
 
     /*
@@ -28,13 +27,13 @@ const Login = () => {
     */
   };
 
-  const handleEmail = (e)=>{
-    setUserLogin({...userLogin, 'email': e.target.value});
-  }
+  const handleEmail = (e) => {
+    setUserLogin({ ...userLogin, email: e.target.value });
+  };
 
-  const handlePassword = (e)=>{
-    setUserLogin({...userLogin, 'password': e.target.value});
-  }
+  const handlePassword = (e) => {
+    setUserLogin({ ...userLogin, password: e.target.value });
+  };
 
   return (
     <Container>

@@ -4,10 +4,10 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "firebase/auth";
-import ConfigFireBase from "../../../api/configFireBase";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+} from 'firebase/auth';
+import ConfigFireBase from './configFireBase';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
 
 // Initialize Firebase
 const app = initializeApp(ConfigFireBase);
@@ -59,10 +59,9 @@ const LoginEmailPassword = async (email, password) => {
       return user;
     })
     .catch((error) => {
-
-      return [{'errorCode': error.code, 'errorMessage': error.message}]
+      return [{ errorCode: error.code, errorMessage: error.message }];
     });
-    return result;
+  return result;
 };
 
 export { LoginGoogle, CreateLoginEmailPassword, LoginEmailPassword };
