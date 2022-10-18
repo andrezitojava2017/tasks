@@ -29,6 +29,8 @@ const NovaTarefa = () => {
     inicio: '',
     fim: '',
     descricao: '',
+    uid: '',
+    situacao:'false',
   });
 
   const changeTitulo = (e) => {
@@ -52,7 +54,7 @@ const NovaTarefa = () => {
   };
 
   const clickCancel = () => {
-    setMydt({ titulo: '', data: '', inicio: '', fim: '', descricao: '' });
+    setMydt({ titulo: '', data: '', inicio: '', fim: '', descricao: '', uid: '', situacao:'' });
   };
 
   const insertNewTask = async () => {
@@ -67,7 +69,9 @@ const NovaTarefa = () => {
         mydt.data,
         mydt.inicio,
         mydt.fim,
-        mydt.descricao
+        mydt.descricao,
+        mydt.situacao,
+        sessionStorage.getItem('data')
       );
 
       if (Array.isArray(result)) {
