@@ -17,6 +17,9 @@ import { arrayListTasks } from '../../api/cloudFirestore';
 const Tarefas = () => {
   const [tasks, setTasks] = useState([]);
   const [data, setData] = useState('');
+
+  const [listChecked, setListChecked] = useState([]);
+
   const diaAtual = () => {
     let dia = new Date().getDate();
     setData(dia);
@@ -29,6 +32,17 @@ const Tarefas = () => {
     let dados = await arrayListTasks();
     setTasks(dados);
   };
+
+  const selectTasks = (e)=>{
+
+    if(e.target.checked){
+      setListChecked( tasks.indexOf(e.target.id));
+      
+    } else {
+      let array = tasks.filter(item=> item.id != e.target.id);
+    }
+    console.log(listChecked);
+  }
 
   useEffect(() => {
     diaAtual();
@@ -65,9 +79,9 @@ const Tarefas = () => {
       </Grid>
       <Grid container justifyContent="center" sx={{ padding: '10px' }}>
         <Grid item xs={4}>
-          {tasks.map((item) => (
-            <Paper elevation={2} key={item.id}>
-              <ItemTarefa tasks={item} />
+          {tasks.map((item, index) => (
+            <Paper elevation={2} key={index}>
+              <ItemTarefa tasks={item} change={selectTasks} indice={index} />
             </Paper>
           ))}
         </Grid>
