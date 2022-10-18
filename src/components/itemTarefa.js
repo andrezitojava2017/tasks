@@ -14,15 +14,14 @@ const ItemTarefa = (props) => {
               <label>
                 <input
                   type="checkbox"
-                  name="itemTarefa"
+                  name="titulo"
                   id="item1"
                   value="Item 1"
                   onChange={test}
                 />
-                ITEM 1ssssssssssssssssssss
+                {`${props.tasks.title}`}
               </label>
             </li>
-
           </ul>
         </div>
       </Grid>

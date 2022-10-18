@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import firebaseConfig from './configFireBase';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { collection, doc, setDoc, getDocs } from 'firebase/firestore';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -33,4 +33,19 @@ const SetNewTask = async (
   }
 };
 
-export { SetNewTask };
+const getListaTasks = async () => {
+  const querySnapshot = await getDocs(collection(db, 'tasks'));
+  return querySnapshot;
+};
+
+const arrayListTasks = async () => {
+  let arrayTasks = [];
+  let list = await getListaTasks();
+
+  list.forEach((doc) => {
+    arrayTasks.push(doc.data());
+  });
+  return arrayTasks;
+};
+
+export { SetNewTask, arrayListTasks };
