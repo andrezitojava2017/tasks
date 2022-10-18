@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import firebaseConfig from './configFireBase';
-import { collection, doc, setDoc, getDocs } from 'firebase/firestore';
+import { collection, query, where, doc, setDoc, getDocs } from 'firebase/firestore';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -14,7 +14,9 @@ const SetNewTask = async (
   taskDate,
   timeInitial,
   timeEnd,
-  descrition
+  descrition,
+  situation,
+  uid
 ) => {
   try {
     const idDocument = doc(collection(db, 'tasks'));
@@ -25,6 +27,8 @@ const SetNewTask = async (
       timEnd: timeEnd,
       description: descrition,
       id: idDocument.id,
+      situation: situation,
+      uidUser: uid,
     });
 
     return idDocument.id;
@@ -33,8 +37,15 @@ const SetNewTask = async (
   }
 };
 
+/**
+ * recupera uma lista de objetos com as tarefas do
+ * usuario logado
+ * @returns querySnapshot[]
+ */
 const getListaTasks = async () => {
-  const querySnapshot = await getDocs(collection(db, 'tasks'));
+  
+  const q = query(collection(db, "tasks"), where("uidUser", "==", `${sessionStorage.getItem('data')}`));
+  const querySnapshot = await getDocs(q);  
   return querySnapshot;
 };
 
