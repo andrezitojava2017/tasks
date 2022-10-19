@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -8,26 +9,101 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import React, { useState } from "react";
+import { SetNewTask } from "../api/cloudFirestore";
+import CircularProgress from "@mui/material/CircularProgress";
+import { green } from "@mui/material/colors";
+import Allert from "./allert";
 
-const NovaTarefa = () => {
+const DialogNewTask = (props) => {
+  // estado que sera utilizado no cmponent Allert
   const [open, setOpen] = useState(false);
+  // estado que define o tipo do alert a ser exibido
+  const [type, setType] = useState("success");
+  // estado que armazena a mensagema a ser exibida no alert
+  const [message, setMessage] = useState("Informação tratada com sucesso!");
+  // estados para exibir a barra de progresso no botao salvar
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const [mydt, setMydt] = useState({
+    titulo: "",
+    data: "",
+    inicio: "",
+    fim: "",
+    descricao: "",
+    uid: "",
+    situacao: false,
+  });
+  const handleClose = () => {
+    props.setOpen(false);
+  };
+  const changeTitulo = (e) => {
+    let titulo = e.target.value;
+    setMydt({ ...mydt, titulo: titulo });
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const changeDate = (e) => {
+    setMydt({ ...mydt, data: e.target.value });
+  };
+
+  const changeHoraInicio = (e) => {
+    setMydt({ ...mydt, inicio: e.target.value });
+  };
+  const changeHoraFim = (e) => {
+    setMydt({ ...mydt, fim: e.target.value });
+  };
+
+  const changeDescricao = (e) => {
+    setMydt({ ...mydt, descricao: e.target.value });
+  };
+
+  const clickCancel = () => {
+    setMydt({
+      titulo: "",
+      data: "",
+      inicio: "",
+      fim: "",
+      descricao: "",
+      uid: "",
+      situacao: false,
+    });
+  };
+
+  const insertNewTask = async () => {
+    if (!loading) {
+      // exibi a barra de progresso no button salvar
+      setSuccess(false);
+      setLoading(true);
+
+      // chama a api que ira inserir os dados no firestore
+      let result = await SetNewTask(
+        mydt.titulo,
+        mydt.data,
+        mydt.inicio,
+        mydt.fim,
+        mydt.descricao,
+        mydt.situacao,
+        sessionStorage.getItem("data")
+      );
+
+      if (Array.isArray(result)) {
+        setOpen(true);
+        setType("error");
+        setMessage(result[0].errorMessage);
+        setLoading(false);
+        setSuccess(true);
+      } else {
+        setLoading(false);
+        setSuccess(true);
+        setOpen(true);
+      }
+    }
   };
 
   return (
     <div>
-      <Button variant="contained" fullWidth onClick={handleClickOpen}>
-        <AddCircleOutlineRoundedIcon />
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={props.open} onClose={handleClose}>
         <DialogTitle>Nova Tarefa</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -41,6 +117,7 @@ const NovaTarefa = () => {
               label="Titulo da tarefa"
               type="text"
               variant="standard"
+              onChange={changeTitulo}
             />
             <TextField
               hiddenLabel
@@ -48,6 +125,7 @@ const NovaTarefa = () => {
               id="data"
               type="date"
               variant="standard"
+              onChange={changeDate}
             />
             <TextField
               hiddenLabel
@@ -55,6 +133,7 @@ const NovaTarefa = () => {
               id="Hinicio"
               type="time"
               variant="standard"
+              onChange={changeHoraInicio}
             />
             <TextField
               hiddenLabel
@@ -62,19 +141,39 @@ const NovaTarefa = () => {
               id="Hfim"
               type="time"
               variant="standard"
+              onChange={changeHoraFim}
             />
             <TextField
-              
               margin="dense"
               id="descricao"
               label="Descrição"
               type="text"
+              onChange={changeDescricao}
               multiline
             />
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Salvar</Button>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ m: 1, position: "relative" }}>
+              <Button disabled={loading} onClick={insertNewTask}>
+                Salvar
+              </Button>
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: green[500],
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-12px",
+                    marginLeft: "-12px",
+                  }}
+                />
+              )}
+            </Box>
+          </Box>
           <Button onClick={handleClose}>Cancelar</Button>
         </DialogActions>
       </Dialog>
@@ -82,4 +181,4 @@ const NovaTarefa = () => {
   );
 };
 
-export default NovaTarefa;
+export default DialogNewTask;
