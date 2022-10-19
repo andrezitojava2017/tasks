@@ -17,33 +17,57 @@ import { arrayListTasks } from '../../api/cloudFirestore';
 const Tarefas = () => {
   const [tasks, setTasks] = useState([]);
   const [data, setData] = useState('');
-
-  const [listChecked, setListChecked] = useState([]);
+  let newchecked = [];
+  const [checked, setChecked] = useState([0]);
 
   const diaAtual = () => {
     let dia = new Date().getDate();
     setData(dia);
   };
+
+  /**
+   * carrega a lista de tarefas ao carregar a pagina
+   */
   useEffect(() => {
     getListTask();
   }, []);
 
+  /**
+   * recupera a lista de tarefas de um determinado usuario
+   */
   const getListTask = async () => {
     let dados = await arrayListTasks();
     setTasks(dados);
   };
 
-  const selectTasks = (e)=>{
-
-    if(e.target.checked){
-      setListChecked( tasks.indexOf(e.target.id));
-      
+  /**
+   * função que ira remover todos os items da lista que estivere
+   * selecionados
+   * @param {event} e
+   */
+  const selectTasks = (e) => {
+    if (e.target.checked) {
+      console.log(`elemento selecionado ${e.target.id}`);
+      // indices que foram selecionados e podem ser removidos de tasks
+      newchecked.push(e.target.id);
     } else {
-      let array = tasks.filter(item=> item.id != e.target.id);
+      console.log(`elemento desselecionado ${e.target.id}`);
+      newchecked = newchecked.filter((item) => item != e.target.id);
     }
-    console.log(listChecked);
-  }
+  };
 
+  /**
+   * função que remove apenas o item que estiver selecionado
+   * @param {event} e
+   */
+  const removeItemChecked = (e) => {
+    let removed = tasks.splice(e.target.id, 1);
+    setChecked(removed);
+  };
+
+  /**
+   * define o dia atual
+   */
   useEffect(() => {
     diaAtual();
   }, [data]);
@@ -81,7 +105,12 @@ const Tarefas = () => {
         <Grid item xs={4}>
           {tasks.map((item, index) => (
             <Paper elevation={2} key={index}>
-              <ItemTarefa tasks={item} change={selectTasks} indice={index} />
+              <ItemTarefa
+                tasks={item}
+                change={selectTasks}
+                indice={index}
+                removeItemChecked={removeItemChecked}
+              />
             </Paper>
           ))}
         </Grid>
