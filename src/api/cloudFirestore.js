@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import firebaseConfig from './configFireBase';
-import { collection, query, where, doc, setDoc, getDocs } from 'firebase/firestore';
+import { collection, query, where, doc, setDoc, getDocs, deleteDoc } from 'firebase/firestore';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -59,4 +59,8 @@ const arrayListTasks = async () => {
   return arrayTasks;
 };
 
-export { SetNewTask, arrayListTasks };
+const deleteTask= async (title)=>{
+  const taskRemoved = await deleteDoc(doc(db, "tasks", `${title}`));
+  console.log(taskRemoved)
+}
+export { SetNewTask, arrayListTasks, deleteTask };
