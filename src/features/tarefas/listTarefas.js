@@ -12,13 +12,13 @@ import Header from '../../components/header';
 import ItemTarefa from '../../components/itemTarefa';
 import LinkHome from '../../components/linkHome';
 import Taref from '../../components/dialogNovaTarefa';
-import { arrayListTasks } from '../../api/cloudFirestore';
+import { arrayListTasks, deleteTask } from '../../api/cloudFirestore';
 
 const Tarefas = () => {
   const [tasks, setTasks] = useState([]);
   const [data, setData] = useState('');
   let newchecked = [];
-  const [checked, setChecked] = useState([0]);
+  const [checked, setChecked] = useState([]);
 
   const diaAtual = () => {
     let dia = new Date().getDate();
@@ -50,9 +50,10 @@ const Tarefas = () => {
       console.log(`elemento selecionado ${e.target.id}`);
       // indices que foram selecionados e podem ser removidos de tasks
       newchecked.push(e.target.id);
+      setChecked(tasks[e.target.id]);
     } else {
       console.log(`elemento desselecionado ${e.target.id}`);
-      newchecked = newchecked.filter((item) => item != e.target.id);
+      newchecked = newchecked.filter((item) => item !== e.target.id);
     }
   };
 
@@ -61,8 +62,9 @@ const Tarefas = () => {
    * @param {event} e
    */
   const removeItemChecked = (e) => {
-    let removed = tasks.splice(e.target.id, 1);
-    setChecked(removed);
+    
+    deleteTask(checked.title);
+    getListTask();
   };
 
   /**
