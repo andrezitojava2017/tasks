@@ -30,7 +30,7 @@ const NovaTarefa = () => {
     fim: '',
     descricao: '',
     uid: '',
-    situacao:'false',
+    situacao: false,
   });
 
   const changeTitulo = (e) => {
@@ -54,7 +54,7 @@ const NovaTarefa = () => {
   };
 
   const clickCancel = () => {
-    setMydt({ titulo: '', data: '', inicio: '', fim: '', descricao: '', uid: '', situacao:'' });
+    setMydt({ titulo: '', data: '', inicio: '', fim: '', descricao: '', uid: '', situacao: false });
   };
 
   const insertNewTask = async () => {
