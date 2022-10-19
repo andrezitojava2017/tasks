@@ -5,31 +5,32 @@ import {
   Grid,
   TextField,
   Typography,
-} from '@mui/material';
-import React, { useState } from 'react';
-import { SetNewTask } from '../../api/cloudFirestore';
-import CircularProgress from '@mui/material/CircularProgress';
-import { green } from '@mui/material/colors';
-import Allert from '../../components/allert';
+} from "@mui/material";
+import React, { useState } from "react";
+import { SetNewTask } from "../../api/cloudFirestore";
+import CircularProgress from "@mui/material/CircularProgress";
+import { green } from "@mui/material/colors";
+import Allert from "../../components/allert";
+import newTaksAndEdit from "./functions/newTaskAndEdit";
 
 const NovaTarefa = () => {
   // estado que sera utilizado no cmponent Allert
   const [open, setOpen] = useState(false);
   // estado que define o tipo do alert a ser exibido
-  const [type, setType] = useState('success');
+  const [type, setType] = useState("success");
   // estado que armazena a mensagema a ser exibida no alert
-  const [message, setMessage] = useState('Informação tratada com sucesso!');
+  const [message, setMessage] = useState("Informação tratada com sucesso!");
   // estados para exibir a barra de progresso no botao salvar
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const [mydt, setMydt] = useState({
-    titulo: '',
-    data: '',
-    inicio: '',
-    fim: '',
-    descricao: '',
-    uid: '',
+    titulo: "",
+    data: "",
+    inicio: "",
+    fim: "",
+    descricao: "",
+    uid: "",
     situacao: false,
   });
 
@@ -54,7 +55,15 @@ const NovaTarefa = () => {
   };
 
   const clickCancel = () => {
-    setMydt({ titulo: '', data: '', inicio: '', fim: '', descricao: '', uid: '', situacao: false });
+    setMydt({
+      titulo: "",
+      data: "",
+      inicio: "",
+      fim: "",
+      descricao: "",
+      uid: "",
+      situacao: false,
+    });
   };
 
   const insertNewTask = async () => {
@@ -71,12 +80,12 @@ const NovaTarefa = () => {
         mydt.fim,
         mydt.descricao,
         mydt.situacao,
-        sessionStorage.getItem('data')
+        sessionStorage.getItem("data")
       );
 
       if (Array.isArray(result)) {
         setOpen(true);
-        setType('error');
+        setType("error");
         setMessage(result[0].errorMessage);
         setLoading(false);
         setSuccess(true);
@@ -95,10 +104,10 @@ const NovaTarefa = () => {
       direction="column"
       justifyContent="center"
       alignItems="center"
-      sx={{ marginTop: '15px', marginBottom: '15px' }}
+      sx={{ marginTop: "15px", marginBottom: "15px" }}
     >
       <Grid item>
-        <Typography variant="h4" sx={{ textAlign: 'center' }}>
+        <Typography variant="h4" sx={{ textAlign: "center" }}>
           <span>Nova Tarefa</span>
         </Typography>
       </Grid>
@@ -113,7 +122,7 @@ const NovaTarefa = () => {
               type="text"
               value={mydt.titulo}
               onChange={changeTitulo}
-              sx={{ padding: '8px' }}
+              sx={{ padding: "8px" }}
             />
           </Grid>
         </Container>
@@ -125,7 +134,7 @@ const NovaTarefa = () => {
             type="date"
             value={mydt.data}
             onChange={changeDate}
-            sx={{ padding: '8px' }}
+            sx={{ padding: "8px" }}
           />
           <TextField
             hiddenLabel
@@ -134,7 +143,7 @@ const NovaTarefa = () => {
             type="time"
             value={mydt.inicio}
             onChange={changeHoraInicio}
-            sx={{ padding: '8px' }}
+            sx={{ padding: "8px" }}
           />
           <TextField
             id="horaFim"
@@ -143,7 +152,7 @@ const NovaTarefa = () => {
             type="time"
             value={mydt.fim}
             onChange={changeHoraFim}
-            sx={{ padding: '8px' }}
+            sx={{ padding: "8px" }}
           />
         </Container>
         <Container>
@@ -157,13 +166,13 @@ const NovaTarefa = () => {
               type="text"
               value={mydt.descricao}
               onChange={changeDescricao}
-              sx={{ padding: '8px' }}
+              sx={{ padding: "8px" }}
             />
           </Grid>
         </Container>
         <Container>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box sx={{ m: 1, position: 'relative' }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ m: 1, position: "relative" }}>
               <Button
                 variant="contained"
                 disabled={loading}
@@ -176,18 +185,18 @@ const NovaTarefa = () => {
                   size={24}
                   sx={{
                     color: green[500],
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    marginTop: '-12px',
-                    marginLeft: '-12px',
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-12px",
+                    marginLeft: "-12px",
                   }}
                 />
               )}
             </Box>
             <Button
               variant="contained"
-              sx={{ marginLeft: '10px' }}
+              sx={{ marginLeft: "10px" }}
               onClick={clickCancel}
             >
               <span>CANCELAR</span>
