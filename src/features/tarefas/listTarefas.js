@@ -54,6 +54,7 @@ const Tarefas = () => {
     } else {
       console.log(`elemento desselecionado ${e.target.id}`);
       newchecked = newchecked.filter((item) => item !== e.target.id);
+      setChecked([])
     }
   };
 
@@ -62,9 +63,11 @@ const Tarefas = () => {
    * @param {event} e
    */
   const removeItemChecked = (e) => {
-    
-    deleteTask(checked.title);
-    getListTask();
+    if(checked != -1){
+      deleteTask(checked.title);
+      getListTask();
+    }
+   
   };
 
   /**

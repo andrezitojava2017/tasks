@@ -61,6 +61,5 @@ const arrayListTasks = async () => {
 
 const deleteTask= async (title)=>{
   const taskRemoved = await deleteDoc(doc(db, "tasks", `${title}`));
-  console.log(taskRemoved)
 }
 export { SetNewTask, arrayListTasks, deleteTask };
