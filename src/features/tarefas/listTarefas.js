@@ -95,9 +95,20 @@ const Tarefas = () => {
         </Grid>
       </Grid>
       <Grid container justifyContent="center">
-        <Grid item xs={4} sx={{ marginTop: '20px' }}>
+        <Grid
+          xs={4}
+          sx={{
+            marginTop: '20px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
           <FormControl fullWidth>
             <TextField id="outlined-search" label="Procurar" type="search" />
+            <label>
+              <input type="checkbox" value="Selecionar todos" />
+              Selecionar todos
+            </label>
           </FormControl>
         </Grid>
       </Grid>
