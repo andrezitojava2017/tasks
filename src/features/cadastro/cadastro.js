@@ -8,6 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
+import { createNewUser } from '../../api/cloudFirestore';
 import { CreateLoginEmailPassword } from '../../api/loginFunctions';
 import Tasks from '../../_assets/images/icons8-unpin-48.png';
 
@@ -35,6 +36,10 @@ const Cadastro = () => {
       userData.email,
       userData.password
     );
+
+    let data = {name: userData.name, email: userData.email, uidEmail: result.uid};
+
+    await createNewUser(data, "users");
     console.log(result);
   };
   return (
