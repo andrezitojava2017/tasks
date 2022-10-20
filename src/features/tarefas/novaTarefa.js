@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   Grid,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -11,6 +12,7 @@ import { SetNewTask } from "../../api/cloudFirestore";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
 import Allert from "../../components/allert";
+import { Link } from "react-router-dom";
 
 const NovaTarefa = () => {
   // estado que sera utilizado no cmponent Allert
@@ -204,6 +206,11 @@ const NovaTarefa = () => {
         </Container>
       </Grid>
       <Allert type={type} open={open} setOpen={setOpen} message={message} />
+      <Stack direction={"row"} justifyContent="center">
+        <Box style={{ marginTop: "20px" }}>
+          <Link to="/">Principal</Link>
+        </Box>
+      </Stack>
     </Grid>
   );
 };
