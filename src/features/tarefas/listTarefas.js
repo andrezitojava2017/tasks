@@ -1,9 +1,11 @@
 import {
+  Box,
   Button,
   Container,
   FormControl,
   Grid,
   Paper,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -14,6 +16,8 @@ import LinkHome from "../../components/linkHome";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import { arrayListTasks, deleteTask } from "../../api/cloudFirestore";
 import DialogNewTask from "../../components/dialogNovaTarefa";
+import { blue } from "@mui/material/colors";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Tarefas = () => {
   const [tasks, setTasks] = useState([]);
@@ -21,7 +25,7 @@ const Tarefas = () => {
   let newchecked = [];
   const [checked, setChecked] = useState([]);
   const [open, setOpen] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -46,8 +50,12 @@ const Tarefas = () => {
    * recupera a lista de tarefas de um determinado usuario
    */
   const getListTask = async () => {
+    setLoading(true);
     let dados = await arrayListTasks();
-    setTasks(dados);
+    setTimeout(() => {
+      setTasks(dados);
+      setLoading(false);
+    }, 3000);
   };
 
   /**
@@ -130,6 +138,27 @@ const Tarefas = () => {
       </Grid>
       <Grid container justifyContent="center" sx={{ padding: "10px" }}>
         <Grid item xs={4}>
+          <Stack
+            direction="column"
+            position="relative"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {loading && (
+              <Box sx={{ position: "relative" }}>
+                <CircularProgress
+                  size={68}
+                  sx={{
+                    color: blue,
+                    position: "absolute",
+                    top: -6,
+                    left: -6,
+                    zIndex: 1,
+                  }}
+                />
+              </Box>
+            )}
+          </Stack>
           {tasks.map((item, index) => (
             <Paper elevation={2} key={index}>
               <ItemTarefa
@@ -145,7 +174,11 @@ const Tarefas = () => {
       </Grid>
       <Grid container justifyContent="center">
         <Grid item xs={4}>
-          <DialogNewTask open = {open} handleOpen={handleClickOpen} setOpen={setOpen}/>
+          <DialogNewTask
+            open={open}
+            handleOpen={handleClickOpen}
+            setOpen={setOpen}
+          />
           <Button variant="contained" fullWidth onClick={handleClickOpen}>
             <AddCircleOutlineRoundedIcon />
           </Button>
