@@ -9,7 +9,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SetNewTask } from "../api/cloudFirestore";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
@@ -26,21 +26,16 @@ const DialogNewTask = (props) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const [mydt, setMydt] = useState({
-    titulo: "",
-    data: "",
-    inicio: "",
-    fim: "",
-    descricao: "",
-    uid: "",
-    situacao: false,
-  });
+  const [mydt, setMydt] = useState();
+
+
   const handleClose = () => {
     props.setOpen(false);
   };
   const changeTitulo = (e) => {
     let titulo = e.target.value;
-    setMydt({ ...mydt, titulo: titulo });
+    props.setTasks({ ...props.dataTask, title: titulo });
+    //props.setTasks(titulo);
   };
 
   const changeDate = (e) => {
@@ -118,6 +113,8 @@ const DialogNewTask = (props) => {
               type="text"
               variant="standard"
               onChange={changeTitulo}
+              value={(props.dataTask != null ? props.dataTask.title : '')}
+              /*value={mydt.titulo}*/
             />
             <TextField
               hiddenLabel
@@ -126,6 +123,7 @@ const DialogNewTask = (props) => {
               type="date"
               variant="standard"
               onChange={changeDate}
+              value={(props.dataTask != null ? props.dataTask.taskDate : '')}
             />
             <TextField
               hiddenLabel
@@ -134,6 +132,7 @@ const DialogNewTask = (props) => {
               type="time"
               variant="standard"
               onChange={changeHoraInicio}
+              value={(props.dataTask != null ? props.dataTask.timeInitial : '')}
             />
             <TextField
               hiddenLabel
@@ -142,6 +141,7 @@ const DialogNewTask = (props) => {
               type="time"
               variant="standard"
               onChange={changeHoraFim}
+              value={(props.dataTask != null ? props.dataTask.timEnd : '')}
             />
             <TextField
               margin="dense"
@@ -149,6 +149,7 @@ const DialogNewTask = (props) => {
               label="Descrição"
               type="text"
               onChange={changeDescricao}
+              value={(props.dataTask != null ? props.dataTask.description : '')}
               multiline
             />
           </Stack>
@@ -176,6 +177,7 @@ const DialogNewTask = (props) => {
           </Box>
           <Button onClick={handleClose}>Cancelar</Button>
         </DialogActions>
+        <Allert type={type} open={open} setOpen={setOpen} message={message}/>
       </Dialog>
     </div>
   );

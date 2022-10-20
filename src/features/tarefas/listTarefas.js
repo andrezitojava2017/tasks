@@ -134,6 +134,7 @@ const Tarefas = () => {
             <Paper elevation={2} key={index}>
               <ItemTarefa
                 tasks={item}
+                setTasks={setTasks}
                 change={selectTasks}
                 indice={index}
                 removeItemChecked={removeItemChecked}
