@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Container,
   FormControl,
@@ -6,17 +7,23 @@ import {
   Stack,
   TextField,
   Typography,
-} from '@mui/material';
-import { useState } from 'react';
-import { createNewUser } from '../../api/cloudFirestore';
-import { CreateLoginEmailPassword } from '../../api/loginFunctions';
-import Tasks from '../../_assets/images/icons8-unpin-48.png';
+} from "@mui/material";
+import { useState } from "react";
+import { createNewUser } from "../../api/cloudFirestore";
+import { CreateLoginEmailPassword } from "../../api/loginFunctions";
+import Tasks from "../../_assets/images/icons8-unpin-48.png";
+import Allert from "../../components/allert";
+import { Link } from "react-router-dom";
 
 const Cadastro = () => {
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("");
+
   const [userData, setUserData] = useState({
-    name: '',
-    email: '',
-    password: '',
+    name: "",
+    email: "",
+    password: "",
   });
 
   const handleChangedName = (e) => {
@@ -37,17 +44,37 @@ const Cadastro = () => {
       userData.password
     );
 
-    let data = {name: userData.name, email: userData.email, uidEmail: result.uid};
+    let data = {
+      name: userData.name,
+      email: userData.email,
+      uidEmail: result.uid,
+    };
+    let resultUser = await createNewUser(data, "users");
 
-    await createNewUser(data, "users");
-    console.log(result);
+    if (Array.isArray(result) || Array.isArray(resultUser)) {
+      setType("error");
+      setMessage(result[0].errorMessage);
+      setOpen(true);
+
+      if (Array.isArray(resultUser)) {
+        setType("error");
+        setMessage(resultUser[0].errorMessage);
+        setOpen(true);
+      }
+    } else {
+      setType("success");
+      setOpen(true);
+      setMessage("Novo usuario cadastrado com sucesso!!!");
+      sessionStorage.setItem('data', JSON.stringify({'uid':result.uid, 'name':userData.name, 'email':userData.email}));
+      document.location.assign("/");
+    }
   };
   return (
     <Container>
       <Grid
         container
         spacing={2}
-        sx={{ marginTop: '15px', marginBottom: '15px' }}
+        sx={{ marginTop: "15px", marginBottom: "15px" }}
       >
         <Grid item xs={3}></Grid>
         <Grid item xs={6}>
@@ -62,7 +89,7 @@ const Cadastro = () => {
               <img
                 src={Tasks}
                 alt="Tasks"
-                style={{ height: '50px', width: '50px' }}
+                style={{ height: "50px", width: "50px" }}
               />
             </Stack>
           </Grid>
@@ -72,7 +99,7 @@ const Cadastro = () => {
               id="nameUser"
               label="Digite seu nome"
               variant="outlined"
-              sx={{ padding: '8px' }}
+              sx={{ padding: "8px" }}
               size="small"
               onChange={handleChangedName}
             />
@@ -82,7 +109,7 @@ const Cadastro = () => {
               label="E-mail"
               variant="outlined"
               type="email"
-              sx={{ padding: '8px' }}
+              sx={{ padding: "8px" }}
               size="small"
               onChange={handleChangeEmail}
             />
@@ -92,7 +119,7 @@ const Cadastro = () => {
               label="Senha"
               variant="outlined"
               type="password"
-              sx={{ padding: '8px' }}
+              sx={{ padding: "8px" }}
               size="small"
               onChange={handleChangePassword}
             />
@@ -102,15 +129,25 @@ const Cadastro = () => {
               fullWidth
               variant="contained"
               color="primary"
-              sx={{ marginBottom: '5px' }}
+              sx={{ marginBottom: "5px" }}
               onClick={handleClikSaveUser}
             >
               Cadastrar
             </Button>
           </Grid>
         </Grid>
+
         <Grid item xs={3}></Grid>
       </Grid>
+      <Stack direction="column" justifyContent="center" alignItems="center">
+        <Allert type={type} open={open} setOpen={setOpen} message={message} />
+      </Stack>
+      <Stack direction={'row'} justifyContent="center">
+        <Box style={{marginRight:'20px'}}>
+          <Link to="/">Principal</Link>
+        </Box>
+
+      </Stack>
     </Container>
   );
 };
