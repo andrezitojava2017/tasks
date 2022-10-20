@@ -9,6 +9,17 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
+const createNewUser = async (data, collect) => {
+  try {
+    const idDocument = doc(collection(db, `${collect}`));
+    const docRef = await setDoc(doc(db, `${collect}`, `${data.name}`), data);
+
+    return idDocument.id;
+  } catch (e) {
+    return [{ errorMessage: e }];
+  }
+};
+
 const SetNewTask = async (
   title,
   taskDate,
@@ -62,4 +73,4 @@ const arrayListTasks = async () => {
 const deleteTask= async (title)=>{
   const taskRemoved = await deleteDoc(doc(db, "tasks", `${title}`));
 }
-export { SetNewTask, arrayListTasks, deleteTask };
+export { SetNewTask, arrayListTasks, deleteTask, createNewUser};
