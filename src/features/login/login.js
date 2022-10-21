@@ -37,7 +37,7 @@ const Login = () => {
       setError(result[0].errorMessage);
       setOpen(true);
     } else {
-      sessionStorage.setItem('data', result.uid);
+      sessionStorage.setItem('data', JSON.stringify(result));
       document.location.reload();
     }
   };
