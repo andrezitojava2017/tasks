@@ -26,16 +26,14 @@ const DialogNewTask = (props) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const [mydt, setMydt] = useState();
+  const [mydt, setMydt] = useState({situacao: false});
 
 
   const handleClose = () => {
     props.setOpen(false);
   };
   const changeTitulo = (e) => {
-    let titulo = e.target.value;
-    props.setTasks({ ...props.dataTask, title: titulo });
-    //props.setTasks(titulo);
+    setMydt({ ...mydt, titulo: e.target.value });
   };
 
   const changeDate = (e) => {
@@ -51,18 +49,6 @@ const DialogNewTask = (props) => {
 
   const changeDescricao = (e) => {
     setMydt({ ...mydt, descricao: e.target.value });
-  };
-
-  const clickCancel = () => {
-    setMydt({
-      titulo: "",
-      data: "",
-      inicio: "",
-      fim: "",
-      descricao: "",
-      uid: "",
-      situacao: false,
-    });
   };
 
   const insertNewTask = async () => {
@@ -113,7 +99,7 @@ const DialogNewTask = (props) => {
               type="text"
               variant="standard"
               onChange={changeTitulo}
-              value={(props.dataTask != null ? props.dataTask.title : '')}
+              value={(props.dataTask != null ? props.dataTask.title : null)}
               /*value={mydt.titulo}*/
             />
             <TextField
@@ -123,7 +109,7 @@ const DialogNewTask = (props) => {
               type="date"
               variant="standard"
               onChange={changeDate}
-              value={(props.dataTask != null ? props.dataTask.taskDate : '')}
+              value={(props.dataTask != null ? props.dataTask.taskDate : null)}
             />
             <TextField
               hiddenLabel
@@ -132,7 +118,7 @@ const DialogNewTask = (props) => {
               type="time"
               variant="standard"
               onChange={changeHoraInicio}
-              value={(props.dataTask != null ? props.dataTask.timeInitial : '')}
+              value={(props.dataTask != null ? props.dataTask.timeInitial : null)}
             />
             <TextField
               hiddenLabel
@@ -141,7 +127,7 @@ const DialogNewTask = (props) => {
               type="time"
               variant="standard"
               onChange={changeHoraFim}
-              value={(props.dataTask != null ? props.dataTask.timEnd : '')}
+              value={(props.dataTask != null ? props.dataTask.timEnd : null)}
             />
             <TextField
               margin="dense"
@@ -149,7 +135,7 @@ const DialogNewTask = (props) => {
               label="Descrição"
               type="text"
               onChange={changeDescricao}
-              value={(props.dataTask != null ? props.dataTask.description : '')}
+              value={(props.dataTask != null ? props.dataTask.description : null)}
               multiline
             />
           </Stack>
