@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { LoginEmailPassword, LoginGoogle } from '../../api/loginFunctions';
 import Allert from '../../components/allert';
+import { getInfoUser } from '../../api/cloudFirestore';
 
 const Login = () => {
   const [open, setOpen] = useState(false);
@@ -22,7 +23,13 @@ const Login = () => {
 
   const loginWithEmailAndPassword = async () => {
     let result = await LoginEmailPassword(userLogin.email, userLogin.password);
-    conditionalCheck(result);
+    let dataUser = await getInfoUser(result.uid);
+    let checkin = '';
+    dataUser.forEach((doc)=>{
+      checkin = JSON.stringify(doc.data());
+    })
+    sessionStorage.setItem('data', checkin);
+    document.location.reload()
   };
 
   const conditionalCheck = (result) => {
