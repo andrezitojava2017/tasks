@@ -1,5 +1,6 @@
 import {
   getAuth,
+  signOut,
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -64,4 +65,12 @@ const LoginEmailPassword = async (email, password) => {
   return result;
 };
 
-export { LoginGoogle, CreateLoginEmailPassword, LoginEmailPassword };
+
+const signnOut=async()=>{
+  await signOut(auth).then(() => {
+}).catch((error) => {
+  console.log('erro ao deslogar usuario')
+});
+}
+
+export { LoginGoogle, CreateLoginEmailPassword, LoginEmailPassword, signnOut };
