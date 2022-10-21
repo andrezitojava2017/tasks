@@ -9,6 +9,13 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
+/**
+ * cria novo usuario na coleção users.
+ * coleção utilizada para logins realizados somente com EMAIL/SENHA
+ * @param {[{}]} data 
+ * @param {String} collect 
+ * @returns String uid
+ */
 const createNewUser = async (data, collect) => {
   try {
     const idDocument = doc(collection(db, `${collect}`));
@@ -60,6 +67,18 @@ const getListaTasks = async () => {
   return querySnapshot;
 };
 
+/**
+ * recupera informações de um usuario cadastrado por EMAIL/SENHA
+ * @param {String} uidUser 
+ * @returns {}
+ */
+const getInfoUser = async (uidUser) => {
+  
+  const q = query(collection(db, "users"), where("uidEmail", "==", `${uidUser}`));
+  const querySnapshot = await getDocs(q);  
+  return querySnapshot;
+};
+
 const arrayListTasks = async () => {
   let arrayTasks = [];
   let list = await getListaTasks();
@@ -73,4 +92,4 @@ const arrayListTasks = async () => {
 const deleteTask= async (title)=>{
   const taskRemoved = await deleteDoc(doc(db, "tasks", `${title}`));
 }
-export { SetNewTask, arrayListTasks, deleteTask, createNewUser};
+export { SetNewTask, arrayListTasks, deleteTask, createNewUser, getInfoUser};
