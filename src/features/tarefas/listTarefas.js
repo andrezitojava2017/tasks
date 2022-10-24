@@ -55,7 +55,7 @@ const Tarefas = () => {
     setTimeout(() => {
       setTasks(dados);
       setLoading(false);
-    }, 3000);
+    }, 2000);
   };
 
   /**
