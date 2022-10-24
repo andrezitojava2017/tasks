@@ -68,6 +68,8 @@ const NovaTarefa = () => {
   };
 
   const insertNewTask = async () => {
+    let uid = JSON.parse(sessionStorage.getItem('data'));
+   
     if (!loading) {
       // exibi a barra de progresso no button salvar
       setSuccess(false);
@@ -81,7 +83,8 @@ const NovaTarefa = () => {
         mydt.fim,
         mydt.descricao,
         mydt.situacao,
-        sessionStorage.getItem("data")
+        uid.uid
+        
       );
 
       if (Array.isArray(result)) {
@@ -96,6 +99,7 @@ const NovaTarefa = () => {
         setOpen(true);
       }
     }
+    
   };
 
   return (
