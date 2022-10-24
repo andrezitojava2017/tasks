@@ -61,8 +61,9 @@ const SetNewTask = async (
  * @returns querySnapshot[]
  */
 const getListaTasks = async () => {
-  
-  const q = query(collection(db, "tasks"), where("uidUser", "==", `${sessionStorage.getItem('data')}`));
+  let uid = JSON.parse(sessionStorage.getItem('data'));
+
+  const q = query(collection(db, "tasks"), where("uidUser", "==", `${uid.uid}`));
   const querySnapshot = await getDocs(q);  
   return querySnapshot;
 };
