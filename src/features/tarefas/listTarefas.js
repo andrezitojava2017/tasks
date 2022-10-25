@@ -26,12 +26,9 @@ const Tarefas = () => {
   const [checked, setChecked] = useState([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   const diaAtual = () => {
@@ -81,7 +78,7 @@ const Tarefas = () => {
    * @param {event} e
    */
   const removeItemChecked = (e) => {
-    if (checked != -1) {
+    if (checked !== -1) {
       deleteTask(checked.title);
       getListTask();
     }
