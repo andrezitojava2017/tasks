@@ -1,8 +1,6 @@
 import { Grid, Tooltip } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import { useEffect, useState } from "react";
 import DialogNewTask from "./dialogNovaTarefa";
 
@@ -10,10 +8,6 @@ import DialogNewTask from "./dialogNovaTarefa";
 const ItemTarefa = (props) => {
   // estado que sera utilizado no cmponent Allert
   const [open, setOpen] = useState(false);
-  // estado que define o tipo do alert a ser exibido
-  const [type, setType] = useState("success");
-  // estado que armazena a mensagema a ser exibida no alert
-  const [message, setMessage] = useState("Informação tratada com sucesso!");
   const [taskSelect, setTaskSelect] = useState({});
 
   const handleClickOpen = () => {
@@ -71,6 +65,7 @@ const ItemTarefa = (props) => {
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
+            {/*
             <Tooltip title="Alterar" placement="bottom-start">
               <IconButton
                 edge="end"
@@ -84,11 +79,12 @@ const ItemTarefa = (props) => {
               <IconButton
                 edge="end"
                 aria-label="confirm"
-                onClick={props.removeItemChecked}
+                onClick={props.updateSituation}
               >
                 <ThumbUpAltIcon />
               </IconButton>
             </Tooltip>
+            */}
           </div>
         </div>
         <DialogNewTask
