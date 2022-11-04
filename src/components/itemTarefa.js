@@ -1,6 +1,8 @@
 import { Grid, Tooltip } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+
 import { useEffect, useState } from "react";
 import DialogNewTask from "./dialogNovaTarefa";
 
@@ -65,16 +67,16 @@ const ItemTarefa = (props) => {
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
-            {/*
+            
             <Tooltip title="Alterar" placement="bottom-start">
               <IconButton
                 edge="end"
                 aria-label="alter"
-                onClick={handleClickOpen}
               >
                 <BorderColorIcon />
               </IconButton>
             </Tooltip>
+            {/*
             <Tooltip title="Marcar concluido" placement="bottom-start">
               <IconButton
                 edge="end"

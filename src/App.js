@@ -8,6 +8,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import NovaTarefa from './features/tarefas/novaTarefa';
+import NotFound from './features/notFound/NotFound';
 
 function App() {
   const userDat = sessionStorage.getItem('data');
@@ -23,6 +24,8 @@ function App() {
             <Route path="/perfil" element={<Perfil />} />
             <Route path="/tarefas" element={<Tarefas />} />
             <Route path="/tarefas/nova" element={<NovaTarefa />} />
+            <Route path="/tarefas/update/:id" element={<NovaTarefa />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         ) : (
           <Routes>

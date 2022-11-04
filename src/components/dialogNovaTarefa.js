@@ -52,6 +52,7 @@ const DialogNewTask = (props) => {
   };
 
   const insertNewTask = async () => {
+    const uid = JSON.parse(sessionStorage.getItem('data'))
     if (!loading) {
       // exibi a barra de progresso no button salvar
       setSuccess(false);
@@ -65,7 +66,7 @@ const DialogNewTask = (props) => {
         mydt.fim,
         mydt.descricao,
         mydt.situacao,
-        sessionStorage.getItem("data")
+        uid.uid
       );
 
       if (Array.isArray(result)) {
@@ -99,7 +100,6 @@ const DialogNewTask = (props) => {
               type="text"
               variant="standard"
               onChange={changeTitulo}
-              value={(props.dataTask != null ? props.dataTask.title : null)}
               /*value={mydt.titulo}*/
             />
             <TextField
@@ -109,7 +109,6 @@ const DialogNewTask = (props) => {
               type="date"
               variant="standard"
               onChange={changeDate}
-              value={(props.dataTask != null ? props.dataTask.taskDate : null)}
             />
             <TextField
               hiddenLabel
@@ -118,7 +117,6 @@ const DialogNewTask = (props) => {
               type="time"
               variant="standard"
               onChange={changeHoraInicio}
-              value={(props.dataTask != null ? props.dataTask.timeInitial : null)}
             />
             <TextField
               hiddenLabel
@@ -127,7 +125,6 @@ const DialogNewTask = (props) => {
               type="time"
               variant="standard"
               onChange={changeHoraFim}
-              value={(props.dataTask != null ? props.dataTask.timEnd : null)}
             />
             <TextField
               margin="dense"
@@ -135,7 +132,6 @@ const DialogNewTask = (props) => {
               label="Descrição"
               type="text"
               onChange={changeDescricao}
-              value={(props.dataTask != null ? props.dataTask.description : null)}
               multiline
             />
           </Stack>

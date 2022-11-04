@@ -3,7 +3,7 @@ import { useState } from "react";
 import { signnOut } from "../api/loginFunctions";
 
 const Header = () => {
-  let photo = JSON.parse(sessionStorage.getItem("data"));
+  const photo = JSON.parse(sessionStorage.getItem("data"));
 
   return (
     <Grid container spacing={2}>

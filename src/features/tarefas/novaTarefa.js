@@ -7,12 +7,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import { SetNewTask } from "../../api/cloudFirestore";
+import React, { useEffect, useState } from "react";
+import { searchTaskById, SetNewTask } from "../../api/cloudFirestore";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
 import Allert from "../../components/allert";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const NovaTarefa = () => {
   // estado que sera utilizado no cmponent Allert
@@ -25,6 +25,14 @@ const NovaTarefa = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  const {id} = useParams();
+
+
+  useEffect(()=>{
+    (async ()=>{
+      await searchTaskById(id);
+    })();
+  }, [])
   const [mydt, setMydt] = useState({
     titulo: "",
     data: "",
@@ -68,7 +76,7 @@ const NovaTarefa = () => {
   };
 
   const insertNewTask = async () => {
-    let uid = JSON.parse(sessionStorage.getItem('data'));
+    const uid = JSON.parse(sessionStorage.getItem('data'));
    
     if (!loading) {
       // exibi a barra de progresso no button salvar
