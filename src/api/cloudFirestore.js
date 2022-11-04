@@ -61,7 +61,7 @@ const SetNewTask = async (
  * @returns querySnapshot[]
  */
 const getListaTasks = async () => {
-  let uid = JSON.parse(sessionStorage.getItem('data'));
+  const uid = JSON.parse(sessionStorage.getItem('data'));
 
   const q = query(collection(db, "tasks"), where("uidUser", "==", `${uid.uid}`));
   const querySnapshot = await getDocs(q);  
@@ -80,6 +80,16 @@ const getInfoUser = async (uidUser) => {
   return querySnapshot;
 };
 
+const searchTaskById = async(id)=>{
+  const q = query(collection(db, "tasks"), where("id", "==", `${id}`));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+  });
+
+}
+
 const arrayListTasks = async () => {
   let arrayTasks = [];
   let list = await getListaTasks();
@@ -93,4 +103,4 @@ const arrayListTasks = async () => {
 const deleteTask= async (title)=>{
   const taskRemoved = await deleteDoc(doc(db, "tasks", `${title}`));
 }
-export { SetNewTask, arrayListTasks, deleteTask, createNewUser, getInfoUser};
+export { SetNewTask, arrayListTasks, deleteTask, createNewUser, getInfoUser, searchTaskById};
