@@ -8,20 +8,20 @@ import {
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
-import { useEffect, useState } from "react";
-import Header from "../../components/header";
-import ItemTarefa from "../../components/itemTarefa";
-import LinkHome from "../../components/linkHome";
-import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
-import { arrayListTasks, deleteTask } from "../../api/cloudFirestore";
-import DialogNewTask from "../../components/dialogNovaTarefa";
-import { blue } from "@mui/material/colors";
-import CircularProgress from "@mui/material/CircularProgress";
+} from '@mui/material';
+import { useEffect, useState } from 'react';
+import Header from '../../components/header';
+import ItemTarefa from '../../components/itemTarefa';
+import LinkHome from '../../components/linkHome';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import { arrayListTasks, deleteTask } from '../../api/cloudFirestore';
+import DialogNewTask from '../../components/dialogNovaTarefa';
+import { blue } from '@mui/material/colors';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Tarefas = () => {
   const [tasks, setTasks] = useState([]);
-  const [data, setData] = useState("");
+  const [data, setData] = useState('');
   let newchecked = [];
   const [checked, setChecked] = useState([]);
   const [open, setOpen] = useState(false);
@@ -30,7 +30,6 @@ const Tarefas = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
 
   const diaAtual = () => {
     let dia = new Date().getDate();
@@ -97,7 +96,7 @@ const Tarefas = () => {
       <Header />
       <Grid container>
         <Grid item xs={12}>
-          <Typography variant="h4" sx={{ textAlign: "center" }}>
+          <Typography variant="h4" sx={{ textAlign: 'center' }}>
             <span>Minhas Tarefas</span>
           </Typography>
         </Grid>
@@ -107,8 +106,7 @@ const Tarefas = () => {
         container
         direction="column"
         justifyContent="center"
-        alignItems="center"
-      >
+        alignItems="center">
         <Grid item xs={6}>
           <Button variant="outlined" onClick={diaAtual}>
             <Typography variant="h4">{data}</Typography>
@@ -119,12 +117,11 @@ const Tarefas = () => {
         <Grid
           xs={4}
           sx={{
-            marginTop: "20px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+            marginTop: '20px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
           <FormControl fullWidth>
             <TextField id="outlined-search" label="Procurar" type="search" />
             <label>
@@ -134,21 +131,20 @@ const Tarefas = () => {
           </FormControl>
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" sx={{ padding: "10px" }}>
+      <Grid container justifyContent="center" sx={{ padding: '10px' }}>
         <Grid item xs={4}>
           <Stack
             direction="column"
             position="relative"
             justifyContent="center"
-            alignItems="center"
-          >
+            alignItems="center">
             {loading && (
-              <Box sx={{ position: "relative" }}>
+              <Box sx={{ position: 'relative' }}>
                 <CircularProgress
                   size={68}
                   sx={{
                     color: blue,
-                    position: "absolute",
+                    position: 'absolute',
                     top: -6,
                     left: -6,
                     zIndex: 1,
@@ -182,7 +178,7 @@ const Tarefas = () => {
           </Button>
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" sx={{ marginTop: "15px" }}>
+      <Grid container justifyContent="center" sx={{ marginTop: '15px' }}>
         <LinkHome />
       </Grid>
     </Container>
