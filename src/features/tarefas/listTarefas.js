@@ -122,13 +122,7 @@ const Tarefas = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <FormControl fullWidth>
-            <TextField id="outlined-search" label="Procurar" type="search" />
-            <label>
-              <input type="checkbox" value="Selecionar todos" />
-              Selecionar todos
-            </label>
-          </FormControl>
+        
         </Grid>
       </Grid>
       <Grid container justifyContent="center" sx={{ padding: '10px' }}>
