@@ -161,6 +161,7 @@ const Tarefas = () => {
                 change={selectTasks}
                 indice={index}
                 removeItemChecked={removeItemChecked}
+                evento={getListTask}
               />
             </Paper>
           ))}
