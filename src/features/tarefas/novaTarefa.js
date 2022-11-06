@@ -28,39 +28,50 @@ const NovaTarefa = () => {
   const {id} = useParams();
 
 
-  useEffect(()=>{
-    (async ()=>{
-      await searchTaskById(id);
-    })();
-  }, [])
+
   const [mydt, setMydt] = useState({
-    titulo: "",
-    data: "",
-    inicio: "",
-    fim: "",
-    descricao: "",
-    uid: "",
-    situacao: false,
+    'title': '',
+    'taskDate': '',
+    'timeInitial': '',
+    'timEnd': '',
+    'description': '',
+    'id': '',
+    'situation': '',
+    'uidUser': '',
   });
+  useEffect(()=>{
+    if(id){
+      (async ()=>{
+        let result = await searchTaskById(id);
+        let data = '';
+        result.forEach((rs)=>{
+          data = rs.data();
+        })
+        setMydt({...data})
+      })();
+    }
+    
+  }, [])
+
 
   const changeTitulo = (e) => {
     let titulo = e.target.value;
-    setMydt({ ...mydt, titulo: titulo });
+    setMydt({ ...mydt, title: titulo });
   };
 
   const changeDate = (e) => {
-    setMydt({ ...mydt, data: e.target.value });
+    setMydt({ ...mydt, taskDate: e.target.value });
   };
 
   const changeHoraInicio = (e) => {
-    setMydt({ ...mydt, inicio: e.target.value });
+    setMydt({ ...mydt, timeInitial: e.target.value });
   };
   const changeHoraFim = (e) => {
-    setMydt({ ...mydt, fim: e.target.value });
+    setMydt({ ...mydt, timEnd: e.target.value });
   };
 
   const changeDescricao = (e) => {
-    setMydt({ ...mydt, descricao: e.target.value });
+    setMydt({ ...mydt, description: e.target.value });
   };
 
   const clickCancel = () => {
@@ -85,12 +96,12 @@ const NovaTarefa = () => {
 
       // chama a api que ira inserir os dados no firestore
       let result = await SetNewTask(
-        mydt.titulo,
-        mydt.data,
-        mydt.inicio,
-        mydt.fim,
-        mydt.descricao,
-        mydt.situacao,
+        mydt.title,
+        mydt.taskDate,
+        mydt.timeInitial,
+        mydt.timEnd,
+        mydt.description,
+        mydt.situation,
         uid.uid
         
       );
@@ -133,7 +144,7 @@ const NovaTarefa = () => {
               label="Titulo"
               variant="outlined"
               type="text"
-              value={mydt.titulo}
+              value={mydt.title}
               onChange={changeTitulo}
               sx={{ padding: "8px" }}
             />
@@ -145,7 +156,7 @@ const NovaTarefa = () => {
             hiddenLabel
             variant="outlined"
             type="date"
-            value={mydt.data}
+            value={mydt.taskDate}
             onChange={changeDate}
             sx={{ padding: "8px" }}
           />
@@ -154,7 +165,7 @@ const NovaTarefa = () => {
             id="horaInicio"
             variant="outlined"
             type="time"
-            value={mydt.inicio}
+            value={mydt.timeInitial}
             onChange={changeHoraInicio}
             sx={{ padding: "8px" }}
           />
@@ -163,7 +174,7 @@ const NovaTarefa = () => {
             hiddenLabel
             variant="outlined"
             type="time"
-            value={mydt.fim}
+            value={mydt.timEnd}
             onChange={changeHoraFim}
             sx={{ padding: "8px" }}
           />
@@ -177,7 +188,7 @@ const NovaTarefa = () => {
               label="Descrição"
               variant="outlined"
               type="text"
-              value={mydt.descricao}
+              value={mydt.description}
               onChange={changeDescricao}
               sx={{ padding: "8px" }}
             />
