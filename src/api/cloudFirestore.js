@@ -10,9 +10,11 @@ import {
   getDocs,
   deleteDoc,
 } from 'firebase/firestore';
+import { getAnalytics } from 'firebase/analytics';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
@@ -103,11 +105,10 @@ const getInfoUser = async (uidUser) => {
 const searchTaskById = async (id) => {
   const q = query(collection(db, 'tasks'), where('id', '==', `${id}`));
   const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, ' => ', doc.data());
-  });
+
+  return querySnapshot
 };
+
 
 const arrayListTasks = async () => {
   let arrayTasks = [];
