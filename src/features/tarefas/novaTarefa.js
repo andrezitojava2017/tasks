@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { searchTaskById, SetNewTask } from "../../api/cloudFirestore";
+import { searchTaskById, SetNewTask, updateTask } from "../../api/cloudFirestore";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
 import Allert from "../../components/allert";
@@ -25,34 +25,30 @@ const NovaTarefa = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const {id} = useParams();
-
-
+  const { id } = useParams();
 
   const [mydt, setMydt] = useState({
-    'title': '',
-    'taskDate': '',
-    'timeInitial': '',
-    'timEnd': '',
-    'description': '',
-    'id': '',
-    'situation': '',
-    'uidUser': '',
+    title: "",
+    taskDate: "",
+    timeInitial: "",
+    timEnd: "",
+    description: "",
+    id: "",
+    situation: "",
+    uidUser: "",
   });
-  useEffect(()=>{
-    if(id){
-      (async ()=>{
+  useEffect(() => {
+    if (id) {
+      (async () => {
         let result = await searchTaskById(id);
-        let data = '';
-        result.forEach((rs)=>{
+        let data = "";
+        result.forEach((rs) => {
           data = rs.data();
-        })
-        setMydt({...data})
+        });
+        setMydt({ ...data });
       })();
     }
-    
-  }, [])
-
+  }, []);
 
   const changeTitulo = (e) => {
     let titulo = e.target.value;
@@ -87,38 +83,40 @@ const NovaTarefa = () => {
   };
 
   const insertNewTask = async () => {
-    const uid = JSON.parse(sessionStorage.getItem('data'));
-   
-    if (!loading) {
-      // exibi a barra de progresso no button salvar
-      setSuccess(false);
-      setLoading(true);
+    const uid = JSON.parse(sessionStorage.getItem("data"));
 
-      // chama a api que ira inserir os dados no firestore
-      let result = await SetNewTask(
-        mydt.title,
-        mydt.taskDate,
-        mydt.timeInitial,
-        mydt.timEnd,
-        mydt.description,
-        mydt.situation,
-        uid.uid
-        
-      );
+    if (id) {
+      await updateTask(mydt, id);
+    } else {
+      if (!loading) {
+        // exibi a barra de progresso no button salvar
+        setSuccess(false);
+        setLoading(true);
 
-      if (Array.isArray(result)) {
-        setOpen(true);
-        setType("error");
-        setMessage(result[0].errorMessage);
-        setLoading(false);
-        setSuccess(true);
-      } else {
-        setLoading(false);
-        setSuccess(true);
-        setOpen(true);
+        // chama a api que ira inserir os dados no firestore
+        let result = await SetNewTask(
+          mydt.title,
+          mydt.taskDate,
+          mydt.timeInitial,
+          mydt.timEnd,
+          mydt.description,
+          mydt.situation,
+          uid.uid
+        );
+
+        if (Array.isArray(result)) {
+          setOpen(true);
+          setType("error");
+          setMessage(result[0].errorMessage);
+          setLoading(false);
+          setSuccess(true);
+        } else {
+          setLoading(false);
+          setSuccess(true);
+          setOpen(true);
+        }
       }
     }
-    
   };
 
   return (
