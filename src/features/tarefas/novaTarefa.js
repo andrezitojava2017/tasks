@@ -72,13 +72,14 @@ const NovaTarefa = () => {
 
   const clickCancel = () => {
     setMydt({
-      titulo: "",
-      data: "",
-      inicio: "",
-      fim: "",
-      descricao: "",
-      uid: "",
-      situacao: false,
+      title: "",
+      taskDate: "",
+      timeInitial: "",
+      timEnd: "",
+      description: "",
+      id: "",
+      situation: "",
+      uidUser: "",
     });
   };
 

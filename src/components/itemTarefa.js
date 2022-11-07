@@ -2,6 +2,7 @@ import { Grid, Tooltip } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 
 import { useEffect, useState } from "react";
 import DialogNewTask from "./dialogNovaTarefa";
@@ -12,6 +13,10 @@ const ItemTarefa = (props) => {
   const [open, setOpen] = useState(false);
   const [taskSelect, setTaskSelect] = useState({});
 
+
+  const viewData=()=>{
+    console.log(taskSelect)
+  }
   const SituationCompleted = () => {
     if (props.tasks.situation) {
       return (
@@ -28,9 +33,12 @@ const ItemTarefa = (props) => {
   };
 
   const handleUpdateSituation = async () => {
-    //console.log(taskSelect);
+    console.log(taskSelect);
+    
     await updateSituationTask(taskSelect);
-    await props.evento()
+    
+    await props.evento();
+    
   };
   const handleClickOpen = () => {
     setOpen(true);
@@ -90,20 +98,20 @@ const ItemTarefa = (props) => {
                 aria-label="alter"
                 onClick={handleUpdateSituation}
               >
-                <BorderColorIcon />
-              </IconButton>
-            </Tooltip>
-            {/*
-            <Tooltip title="Marcar concluido" placement="bottom-start">
-              <IconButton
-                edge="end"
-                aria-label="confirm"
-                onClick={props.updateSituation}
-              >
                 <ThumbUpAltIcon />
               </IconButton>
             </Tooltip>
-            */}
+            {
+              <Tooltip title="Alterar" placement="bottom-start">
+                <IconButton
+                  edge="end"
+                  aria-label="confirm"
+                  onClick={viewData}
+                >
+                  <BorderColorIcon />
+                </IconButton>
+              </Tooltip>
+            }
           </div>
         </div>
         <DialogNewTask
