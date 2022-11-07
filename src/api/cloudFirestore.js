@@ -37,24 +37,34 @@ const createNewUser = async (data, collect) => {
   }
 };
 
-const updateSituationTask = async ({ title, situation }) => {
-  const reference = doc(db, "tasks", `${title}`);
+const updateSituationTask = async ({ id, situation }) => {
+  let idTask = "";
+
+  // recuperamos o ID do documento que iremos alterar
+  await searchTaskById(id).then((response) => {
+    response.forEach((data) => {
+      idTask = data.id;
+    });
+  });
+
+  const reference = doc(db, "tasks", `${idTask}`);
   await updateDoc(reference, {
     situation: !situation,
   });
 };
 
 const updateTask = async (dataTask, id) => {
-  let idTask = '';
-  const q = query(collection(db, "tasks"), where("id", "==", `${id}`));
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    idTask = doc.id;
+  let idTask = "";
+
+  // recuperamos o ID do documento que iremos alterar
+  await searchTaskById(id).then((response) => {
+    response.forEach((data) => {
+      idTask = data.id;
+    });
   });
+
   const washingtonRef = doc(db, "tasks", `${idTask}`);
 
-  // Set the "capital" field of the city 'DC'
   await updateDoc(washingtonRef, {
     title: dataTask.title,
     taskDate: dataTask.taskDate,
