@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-
+import {Navigate, useNavigate} from 'react-router-dom'
 import { useEffect, useState } from "react";
 import DialogNewTask from "./dialogNovaTarefa";
 import { updateSituationTask } from "../api/cloudFirestore";
@@ -12,11 +12,11 @@ const ItemTarefa = (props) => {
   // estado que sera utilizado no cmponent Allert
   const [open, setOpen] = useState(false);
   const [taskSelect, setTaskSelect] = useState({});
+  const navigate = useNavigate();
 
-
-  const viewData=()=>{
-    console.log(taskSelect)
-  }
+  const changeTask = () => {
+    navigate(`/tarefas/update/${props.tasks.id}`)
+  };
   const SituationCompleted = () => {
     if (props.tasks.situation) {
       return (
@@ -33,13 +33,11 @@ const ItemTarefa = (props) => {
   };
 
   const handleUpdateSituation = async () => {
-    console.log(taskSelect);
-    
+    //console.log(taskSelect);
     await updateSituationTask(taskSelect);
-    
     await props.evento();
-    
   };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -65,7 +63,7 @@ const ItemTarefa = (props) => {
                   type="checkbox"
                   id={props.indice}
                   value={props.tasks.title}
-                  onChange={props.change}
+                  onChange={props.markerCheck}
                 />
 
                 {`${props.tasks.title}`}
@@ -103,11 +101,7 @@ const ItemTarefa = (props) => {
             </Tooltip>
             {
               <Tooltip title="Alterar" placement="bottom-start">
-                <IconButton
-                  edge="end"
-                  aria-label="confirm"
-                  onClick={viewData}
-                >
+                <IconButton edge="end" aria-label="confirm" onClick={changeTask}>
                   <BorderColorIcon />
                 </IconButton>
               </Tooltip>

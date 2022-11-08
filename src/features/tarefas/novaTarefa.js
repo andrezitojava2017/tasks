@@ -8,7 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { searchTaskById, SetNewTask, updateTask } from "../../api/cloudFirestore";
+import {
+  searchTaskById,
+  SetNewTask,
+  updateTask,
+} from "../../api/cloudFirestore";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
 import Allert from "../../components/allert";
@@ -87,7 +91,17 @@ const NovaTarefa = () => {
     const uid = JSON.parse(sessionStorage.getItem("data"));
 
     if (id) {
-      await updateTask(mydt, id);
+      if (!loading) {
+        // exibi a barra de progresso no button salvar
+        setSuccess(false);
+        setLoading(true);
+
+        if (await updateTask(mydt, id)) {
+          setLoading(false);
+          setSuccess(true);
+          setOpen(true);
+        }
+      }
     } else {
       if (!loading) {
         // exibi a barra de progresso no button salvar
@@ -228,9 +242,12 @@ const NovaTarefa = () => {
         </Container>
       </Grid>
       <Allert type={type} open={open} setOpen={setOpen} message={message} />
-      <Stack direction={"row"} justifyContent="center">
+      <Stack direction={"row"} justifyContent="center" spacing={4}>
         <Box style={{ marginTop: "20px" }}>
           <Link to="/">Principal</Link>
+        </Box>
+        <Box style={{ marginTop: "20px" }}>
+          <Link to="/tarefas">Minhas tarefas</Link>
         </Box>
       </Stack>
     </Grid>

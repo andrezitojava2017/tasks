@@ -63,16 +63,17 @@ const updateTask = async (dataTask, id) => {
     });
   });
 
-  const washingtonRef = doc(db, "tasks", `${idTask}`);
+  const reference = doc(db, "tasks", `${idTask}`);
 
-  await updateDoc(washingtonRef, {
+  await updateDoc(reference, {
     title: dataTask.title,
     taskDate: dataTask.taskDate,
     timeInitial: dataTask.timeInitial,
-    timeEnd: dataTask.timEnd,
+    timEnd: dataTask.timEnd,
     description: dataTask.description,
     situation: dataTask.situation,
   });
+  return true;
 };
 
 const SetNewTask = async (
@@ -150,8 +151,15 @@ const arrayListTasks = async () => {
   return arrayTasks;
 };
 
-const deleteTask = async (title) => {
-  const taskRemoved = await deleteDoc(doc(db, "tasks", `${title}`));
+const deleteTask = async (id) => {
+  let idTask = '';
+  // recuperamos o ID do documento que iremos alterar
+  await searchTaskById(id).then((response) => {
+    response.forEach((data) => {
+      idTask = data.id;
+    });
+  });
+  const taskRemoved = await deleteDoc(doc(db, "tasks", `${idTask}`));
 };
 export {
   SetNewTask,
